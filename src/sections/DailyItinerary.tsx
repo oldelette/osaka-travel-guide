@@ -4,7 +4,8 @@ import { directionsUrl } from '../data/dayRoutes';
 import Photo from '../components/Photo';
 import StatusBadge from '../components/StatusBadge';
 
-export default function DailyItinerary() {
+interface DailyItineraryProps { selectedDay: number; selectedIndex: number | null; onSelectStop: (day: number, index: number) => void }
+export default function DailyItinerary({ selectedDay, selectedIndex, onSelectStop }: DailyItineraryProps) {
   return (
     <div aria-label="每日行程">
       {days.map((day) => (
@@ -39,7 +40,7 @@ export default function DailyItinerary() {
 
           <div className="timeline">
             {day.stops.map((stop, index) => (
-              <article className={`stop ${stop.optional ? 'optional' : ''}`} key={`${day.day}-${stop.title}`}>
+              <article id={`stop-${day.day}-${index}`} className={`stop ${stop.optional ? 'optional' : ''} ${selectedDay === day.day && selectedIndex === index ? 'stop-active' : ''}`} key={`${day.day}-${stop.title}`} onClick={(event) => { if (!(event.target instanceof Element) || !event.target.closest('a')) onSelectStop(day.day, index); }} onKeyDown={(event) => { if (event.key === 'Enter' || event.key === ' ') onSelectStop(day.day, index); }} tabIndex={0}>
                 <div className="stop-time">{stop.time}</div>
                 <div className="stop-pin"><span /></div>
                 <div className="stop-content">

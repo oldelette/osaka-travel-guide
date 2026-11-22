@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build --configLoader runner",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:ui": "node --test"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",

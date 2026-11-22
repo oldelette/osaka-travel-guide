@@ -10,9 +10,11 @@ import FlightAndTransfers from './sections/FlightAndTransfers';
 import HotelStay from './sections/HotelStay';
 import TravelNotes from './sections/TravelNotes';
 import TripOverview from './sections/TripOverview';
+import DailyMap from './sections/DailyMap';
 
 const navItems: NavigationItem[] = [
   { id: 'overview', label: '旅程總覽' },
+  { id: 'daily-map', label: '每日景點地圖' },
   ...days.map((day) => ({ id: `day-${day.day}`, label: `DAY 0${day.day}｜${day.theme}` })),
   { id: 'essentials', label: '出發前確認' },
   { id: 'hotel', label: '住宿資訊' },
@@ -34,6 +36,8 @@ export default function App() {
   const [checked, setChecked] = useState<Record<string, boolean>>(loadChecklist);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('overview');
+  const [selectedDay, setSelectedDay] = useState(1);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   useEffect(() => {
     try { window.localStorage.setItem(checklistStorageKey, JSON.stringify(checked)); } catch { /* Keep this visit interactive when storage is unavailable. */ }
@@ -58,6 +62,20 @@ export default function App() {
   }, []);
 
   const toggleChecklistItem = (key: string) => setChecked((current) => ({ ...current, [key]: !current[key] }));
+  const changeDay = (day: number) => { setSelectedDay(day); setSelectedIndex(null); };
+  const selectFromTimeline = (day: number, index: number) => {
+    setSelectedDay(day);
+    setSelectedIndex(index);
+    if (window.matchMedia('(max-width: 860px)').matches) document.getElementById('daily-map')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+  const selectFromMap = (index: number) => {
+    setSelectedIndex(index);
+    document.getElementById(`stop-${selectedDay}-${index}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+  const selectMapDay = (day: number) => {
+    changeDay(day);
+    if (!window.matchMedia('(max-width: 860px)').matches) document.getElementById(`day-${day}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   return (
     <div className="site-shell">
@@ -71,7 +89,10 @@ export default function App() {
         </header>
         <TripOverview />
         <FlightAndTransfers />
-        <DailyItinerary />
+        <div className="daily-map-experience">
+          <div className="daily-map-itinerary"><DailyItinerary selectedDay={selectedDay} selectedIndex={selectedIndex} onSelectStop={selectFromTimeline} /></div>
+          <DailyMap day={days.find((day) => day.day === selectedDay) ?? days[0]} selectedIndex={selectedIndex} onSelect={selectFromMap} onDayChange={selectMapDay} />
+        </div>
         <BeforeYouGo />
         <HotelStay />
         <TravelNotes />
