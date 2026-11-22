@@ -1,132 +1,68 @@
 import { useState } from 'react';
-import { CalendarDays, ChevronRight, ExternalLink, MapPin, TrainFront } from 'lucide-react';
+import { ArrowRight, ExternalLink, MapPin, TrainFront } from '../icons';
 
-type TrainChoice = 'airport-express' | 'rapit';
+type TrainChoice = 'rapit' | 'airport-express';
 
-const steps = [
-  {
-    number: '01',
-    title: '入境後前往 2 樓鐵道車站',
-    description: '完成入境、領取行李並通過海關後，從第一航廈入境大廳依「Railway／鐵道」指標前往 2 樓，走空橋抵達關西機場站。JR 與南海電鐵車站相鄰，認明 NANKAI 標誌再進站。',
-    tag: 'KIX T1 → 2F',
-    href: 'https://www.kansai-airport.or.jp/en/access/train',
-    linkLabel: '關西機場鐵道交通',
-  },
-  {
-    number: '02',
-    title: '搭南海電鐵前往難波',
-    description: '搭往 Namba 的南海電鐵。空港急行適合省預算、直接到難波；Rapi:t 全車指定席，最快約 34 分鐘，適合希望有固定座位與較舒適行李空間的旅人。Rapi:t 需另購特急券。',
-    tag: '南海電鐵 NANKAI',
-    href: 'https://www.nankai.co.jp/en_railway/traffic/kix.html',
-    linkLabel: '南海電鐵機場交通',
-  },
-  {
-    number: '03',
-    title: '南海難波站轉乘千日前線',
-    description: '抵達南海難波站後，跟著 Osaka Metro 指標前往千日前線。站內轉乘通道較長，帶大型行李建議預留約 10–15 分鐘並使用電梯；途中認明粉紅色 Sennichimae Line 標誌。',
-    tag: '站內轉乘預留 10–15 分鐘',
-    href: 'https://subway.osakametro.co.jp/en/station_guide/M/m20/map.php',
-    linkLabel: '大阪 Metro 難波站資訊',
-  },
-  {
-    number: '04',
-    title: '千日前線搭一站至日本橋',
-    description: '在難波 S16 搭乘往南巽方向的列車，下一站日本橋 S17 下車。注意：M20 是御堂筋線難波站代碼；這段轉乘要找千日前線 S16。',
-    tag: 'S16 難波 → S17 日本橋',
-    href: 'https://subway.osakametro.co.jp/en/station_guide/S/S17/',
-    linkLabel: '大阪 Metro 日本橋站資訊',
-  },
-  {
-    number: '05',
-    title: '從 7 號出口步行到飯店',
-    description: '日本橋站由 7 號出口出站，步行約 6–8 分鐘抵達 Apartment Hotel 11 Dotonbori 8。飯店自助入住：預計抵達前三天收到 Check-in Link；請先完成資料登錄，入住日 16:00 起可在連結查看房號與進房方式。',
-    tag: '出口 7 · 約 6–8 分鐘',
-    href: 'https://apt11.jp/en/stays/0c2842db-e0ed-4abd-8811-15882070ffd0',
-    linkLabel: '飯店官方交通與入住說明',
-  },
-];
-
-const mapUrl = 'https://www.google.com/maps/dir/?api=1&origin=Kansai+International+Airport&destination=Apartment+Hotel+11+Dotonbori+8&travelmode=transit';
+const officialLinks = {
+  nankai: 'https://www.nankai.co.jp/en_railway/traffic/kix.html',
+  rapit: 'https://www.nankai.co.jp/en_railway/traffic/express/rapit.html',
+  metro: 'https://subway.osakametro.co.jp/en/station_guide/S/S17/',
+  hotel: 'https://apt11.jp/en/stays/0c2842db-e0ed-4abd-8811-15882070ffd0',
+  bus: 'https://www.kate.co.jp/en/timetable/detail/OC',
+};
+const airportMap = 'https://www.google.com/maps/dir/?api=1&origin=Kansai+International+Airport+Terminal+1&destination=Apartment+Hotel+11+Dotonbori+8&travelmode=transit';
 
 export default function AirportRouteGuide() {
   const [trainChoice, setTrainChoice] = useState<TrainChoice>('rapit');
-  const selected = trainChoice === 'rapit'
-    ? { title: 'Rapi:t 特急', time: '最快約 34 分鐘', detail: '全車指定席，需另購特急券；適合想確保座位、帶大型行李的旅人。' }
-    : { title: '空港急行', time: '約 45 分鐘', detail: '直接到南海難波，不需特急券；較省預算，尖峰時段座位依現場狀況。' };
+  const isRapit = trainChoice === 'rapit';
 
   return (
-    <div id="airport-route" className="mt-7 border-t border-[var(--line)] pt-7">
-      <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+    <div id="airport-route" className="airport-guide mt-7 border-t border-[var(--line)] pt-7">
+      <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
         <div>
           <span className="section-label">ARRIVAL GUIDE · KIX TO HOTEL</span>
-          <h2 className="mt-2 font-[var(--serif)] text-[28px] font-medium tracking-wide text-[var(--navy)] max-[860px]:text-[23px]">關西機場，一步步到飯店</h2>
-          <p className="mt-2 text-[11px] leading-7 text-[#737c77]">南海電鐵 → Osaka Metro 千日前線 → 日本橋站 7 號出口</p>
+          <h3 className="mt-2 font-[var(--serif)] text-2xl font-medium text-[var(--navy)]">關西機場 → 道頓堀住宿</h3>
+          <p className="mt-2 max-w-2xl text-sm leading-7 text-[#66736f]">第一航廈入境後，依「鐵道」指標到關西機場站。搭南海電鐵至難波，轉大阪 Metro 千日前線一站到日本橋，再由 7 號出口步行到住宿。</p>
         </div>
-        <a className="inline-flex items-center gap-2 border border-[#c9c4b8] px-4 py-3 text-[10px] text-[var(--navy)] no-underline hover:bg-[var(--navy)] hover:text-white" href={mapUrl} target="_blank" rel="noreferrer">
-          <MapPin size={14}/> 開啟 Google Maps 導航 <ExternalLink size={12}/>
+        <a className="touch-link inline-flex min-h-11 items-center gap-2 border border-[#c9c4b8] px-4 py-2 text-sm text-[var(--navy)] no-underline hover:bg-[var(--navy)] hover:text-white" href={airportMap} target="_blank" rel="noreferrer">
+          <MapPin size={16}/>Google Maps 路線<ExternalLink size={14}/>
         </a>
       </div>
 
-      <div className="mb-7 grid grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] items-center gap-3 rounded-sm bg-[#ede9df] px-5 py-5 text-center max-[860px]:grid-cols-2 max-[860px]:gap-4">
-        {[
-          ['KIX', '關西機場站'], ['NANKAI', '南海難波站'], ['S16', '難波・千日前線'], ['S17', '日本橋站・出口 7'],
-        ].map(([code, name], index) => (
-          <div className="contents" key={code}>
-            <div className="flex flex-col items-center gap-1">
-              <b className="font-[var(--serif)] text-[16px] text-[var(--orange)]">{code}</b>
-              <span className="text-[9px] text-[#66736f]">{name}</span>
-            </div>
-            {index < 3 && <ChevronRight className="mx-auto text-[#b9aa99] max-[860px]:hidden" size={16}/>}
-          </div>
-        ))}
+      <div className="mb-6 grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-3 bg-[#ede9df] px-5 py-4 text-center max-[600px]:grid-cols-1">
+        <div><b className="block text-base text-[var(--orange)]">KIX</b><span className="text-sm">關西機場站</span></div><ArrowRight className="mx-auto text-[#b9aa99] max-[600px]:rotate-90" size={17}/>
+        <div><b className="block text-base text-[var(--orange)]">南海難波</b><span className="text-sm">轉大阪 Metro</span></div><ArrowRight className="mx-auto text-[#b9aa99] max-[600px]:rotate-90" size={17}/>
+        <div><b className="block text-base text-[var(--orange)]">日本橋 S17</b><span className="text-sm">7 號出口，步行約 6–8 分鐘</span></div>
       </div>
 
-      <div className="mb-7 grid grid-cols-2 gap-3 max-[560px]:grid-cols-1" role="group" aria-label="選擇南海電鐵車種">
+      <div className="mb-5 grid grid-cols-2 gap-3 max-[600px]:grid-cols-1" role="group" aria-label="選擇南海電鐵車種">
         {(['rapit', 'airport-express'] as const).map((choice) => {
-          const isRapit = choice === 'rapit';
+          const rapid = choice === 'rapit';
           const active = trainChoice === choice;
-          return (
-            <button key={choice} type="button" onClick={() => setTrainChoice(choice)} aria-pressed={active}
-              className={`border p-4 text-left transition-colors ${active ? 'border-[var(--orange)] bg-[#f0e7dc]' : 'border-[var(--line)] bg-transparent hover:bg-[#efebe1]'}`}>
-              <span className="flex items-center justify-between gap-2">
-                <b className="font-[var(--serif)] text-[14px] text-[var(--navy)]">{isRapit ? 'Rapi:t 特急' : '空港急行'}</b>
-                <span className="text-[8px] tracking-wide text-[#987158]">{isRapit ? '指定席・舒適' : '經濟・直達'}</span>
-              </span>
-              <span className="mt-2 block text-[9px] leading-5 text-[#737c77]">{isRapit ? '最快約 34 分鐘；另購特急券。' : '約 45 分鐘；無需特急券。'}</span>
-            </button>
-          );
+          return <button key={choice} type="button" onClick={() => setTrainChoice(choice)} aria-pressed={active} className={`touch-link min-h-11 border p-4 text-left transition-colors ${active ? 'border-[var(--orange)] bg-[#f0e7dc]' : 'border-[var(--line)] bg-transparent hover:bg-[#efebe1]'}`}>
+            <b className="block font-[var(--serif)] text-base text-[var(--navy)]">{rapid ? '南海 Rapi:t 特急' : '南海空港急行'}</b>
+            <span className="mt-1 block text-sm leading-6 text-[#65716d]">{rapid ? '最快約 34 分鐘到南海難波；全車指定席，須另購特急券。成人普通座全程約 ¥1,860（南海約 ¥1,670＋Metro ¥190）。' : '約 43–45 分鐘到南海難波；一般車、不需特急券或指定席，全程成人約 ¥1,160（南海約 ¥970＋Metro ¥190）。'}</span>
+          </button>;
         })}
       </div>
 
-      <div className="mb-7 flex items-start gap-3 border-l-2 border-[var(--orange)] bg-[#f0ece2] px-4 py-4">
-        <TrainFront className="mt-0.5 shrink-0 text-[var(--orange)]" size={18}/>
-        <div>
-          <b className="text-[11px] text-[var(--navy)]">目前選擇：{selected.title} · {selected.time}</b>
-          <p className="mb-0 mt-1 text-[9px] leading-6 text-[#737c77]">{selected.detail} 到難波後仍需轉乘地鐵，再步行到飯店。</p>
-        </div>
+      <div className="mb-6 flex items-start gap-3 border-l-2 border-[var(--orange)] bg-[#f0ece2] px-4 py-4">
+        <TrainFront className="mt-1 shrink-0 text-[var(--orange)]" size={19}/>
+        <p className="m-0 text-sm leading-7 text-[#596662]"><b className="text-[var(--navy)]">目前選擇：{isRapit ? 'Rapi:t 特急' : '空港急行'}</b><br/>{isRapit ? '適合希望有固定座位、帶大型行李較好安置的旅客；4 人可先買相鄰指定席。' : '適合想省車資、可接受一般通勤列車乘車方式的旅客；尖峰時座位與行李空間較不固定。'} 兩種車都搭到南海難波，不必中途換南海列車。</p>
       </div>
 
-      <ol className="grid grid-cols-2 gap-x-8 gap-y-5 max-[860px]:grid-cols-1">
-        {steps.map((step) => (
-          <li key={step.number} className="airport-route-step grid grid-cols-[38px_minmax(0,1fr)] gap-3 border-t border-[var(--line)] py-4">
-            <span className="font-[var(--serif)] text-[18px] text-[var(--orange)]">{step.number}</span>
-            <div>
-              <span className="text-[8px] tracking-wide text-[#9a715d]">{step.tag}</span>
-              <h3 className="mb-2 mt-1 font-[var(--serif)] text-[14px] font-medium text-[var(--navy)]">{step.title}</h3>
-              <p className="m-0 text-[9px] leading-[1.9] text-[#6d7772]">{step.description}</p>
-              <a className="mt-3 inline-flex items-center gap-1 text-[9px] text-[#9d674d] no-underline hover:underline" href={step.href} target="_blank" rel="noreferrer">{step.linkLabel}<ExternalLink size={11}/></a>
-            </div>
-          </li>
-        ))}
+      <ol className="grid grid-cols-2 gap-x-8 gap-y-5 max-[700px]:grid-cols-1">
+        <li className="airport-route-step border-t border-[var(--line)] py-4"><span className="section-label">01 · KIX T1</span><h4 className="my-2 font-[var(--serif)] text-base">入境後前往鐵道車站</h4><p className="m-0 text-sm leading-7 text-[#66736f]">完成入境、領行李及海關後，按「鐵道／Railway」標示上二樓，經空橋到關西機場站。留意南海與 JR 是不同閘口。</p><a className="touch-link mt-2 inline-flex min-h-11 items-center gap-2 text-sm text-[#9d674d]" href="https://www.kansai-airport.or.jp/en/access/train" target="_blank" rel="noreferrer">關西機場官方車站資訊<ExternalLink size={14}/></a></li>
+        <li className="airport-route-step border-t border-[var(--line)] py-4"><span className="section-label">02 · NANKAI</span><h4 className="my-2 font-[var(--serif)] text-base">購票並搭到南海難波</h4><p className="m-0 text-sm leading-7 text-[#66736f]">空港急行只需基本車票；Rapi:t 另需特急券並指定座位。可在售票機／櫃檯購買，或依南海官方服務預購。</p><a className="touch-link mt-2 inline-flex min-h-11 items-center gap-2 text-sm text-[#9d674d]" href={isRapit ? officialLinks.rapit : officialLinks.nankai} target="_blank" rel="noreferrer">南海電鐵官方車種資訊<ExternalLink size={14}/></a></li>
+        <li className="airport-route-step border-t border-[var(--line)] py-4"><span className="section-label">03 · OSAKA METRO</span><h4 className="my-2 font-[var(--serif)] text-base">難波轉千日前線一站</h4><p className="m-0 text-sm leading-7 text-[#66736f]">出南海閘口後跟隨 Osaka Metro 指標到千日前線難波站，搭往南巽方向，在日本橋 S17 下車；Metro 成人基本車資 ¥190。南海難波與地鐵站間需預留轉乘步行時間。</p><a className="touch-link mt-2 inline-flex min-h-11 items-center gap-2 text-sm text-[#9d674d]" href="https://subway.osakametro.co.jp/guide/fare/fare/price.php" target="_blank" rel="noreferrer">Metro 官方票價與站務資訊<ExternalLink size={14}/></a></li>
+        <li className="airport-route-step border-t border-[var(--line)] py-4"><span className="section-label">04 · ON FOOT</span><h4 className="my-2 font-[var(--serif)] text-base">日本橋站 7 號出口到住宿</h4><p className="m-0 text-sm leading-7 text-[#66736f]">依現場電梯與出口狀況選擇動線，步行約 6–8 分鐘；四人及大型行李若轉乘不便，可在南海難波改搭計程車。</p><a className="touch-link mt-2 inline-flex min-h-11 items-center gap-2 text-sm text-[#9d674d]" href={officialLinks.hotel} target="_blank" rel="noreferrer">住宿官方交通說明<ExternalLink size={14}/></a></li>
       </ol>
-
-      <div className="mt-5 grid grid-cols-3 gap-3 max-[860px]:grid-cols-1">
-        <div className="flex items-start gap-2 bg-[#ede9df] p-4"><CalendarDays size={15} className="mt-0.5 shrink-0 text-[var(--orange)]"/><p className="m-0 text-[9px] leading-6 text-[#66736f]"><b className="text-[var(--navy)]">車程抓法</b><br/>機場站到飯店約 55–75 分鐘，視候車與轉乘步行而異；不含入境、領行李。飯店資訊估約 75 分鐘。</p></div>
-        <div className="flex items-start gap-2 bg-[#ede9df] p-4"><TrainFront size={15} className="mt-0.5 shrink-0 text-[var(--orange)]"/><p className="m-0 text-[9px] leading-6 text-[#66736f]"><b className="text-[var(--navy)]">4 人與大型行李</b><br/>每人準備 ICOCA 可刷一般車資；搭 Rapi:t 仍須另備特急券（或購買含乘車票的套票）。轉乘及出口請找電梯。</p></div>
-        <div className="flex items-start gap-2 bg-[#ede9df] p-4"><MapPin size={15} className="mt-0.5 shrink-0 text-[var(--orange)]"/><p className="m-0 text-[9px] leading-6 text-[#66736f]"><b className="text-[var(--navy)]">行李與步行</b><br/>此路線可搭大眾運輸抵達；最後仍需步行約 6–8 分鐘。若行李很多，可視體力改搭短程計程車。</p></div>
-      </div>
-
-      <p className="mb-0 mt-4 text-[8px] leading-5 text-[#8a8f87]">班次、票價及車種時刻請出發前以南海電鐵官方資訊確認；抵達前約三天留意飯店寄送的自助入住連結。</p>
+      <aside className="airport-bus-option mt-5 border border-[var(--line)] p-4">
+        <b className="font-[var(--serif)] text-base text-[var(--navy)]">行李多、想少轉乘：機場巴士到難波 OCAT</b>
+        <p className="mb-2 mt-1 text-sm leading-7 text-[#66736f]">KIX T1 → 難波 OCAT，官方標示約 50 分鐘、成人單程 ¥1,400；採先到先上、不劃位，到 OCAT 後仍需另安排最後一段到住宿。適合希望行李放車廂、減少鐵路轉乘的人，出發前核對班次及行李規定。</p>
+        <a className="touch-link inline-flex min-h-11 items-center gap-2 text-sm text-[#9d674d]" href={officialLinks.bus} target="_blank" rel="noreferrer">機場巴士官方班次與票價<ExternalLink size={14}/></a>
+      </aside>
+      <p className="mt-4 border-t border-[var(--line)] pt-3 text-xs leading-6 text-[#777f79]">車資依 2026 年 4 月調整後南海資料整理，Metro 段車資另計；班次及票價可能調整，出發前請以營運商查詢為準。從機場至住宿的總時間會受入境、等車及轉乘步行影響，以上不把這些時間合併成保證值。</p>
     </div>
   );
 }

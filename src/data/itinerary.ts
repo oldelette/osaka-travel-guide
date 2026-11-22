@@ -1,4 +1,4 @@
-import type { DayPlan } from '../types';
+import type { ChecklistGroup, DayPlan } from '../types';
 const maps = (q: string) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
 export const days: DayPlan[] = [
  { day:1,date:'12.23',weekday:'週三',theme:'大阪經典地標',location:'大阪市區',image:'大阪城與天守閣',note:'抵達日保留彈性。若交通或體力不如預期，優先安排道頓堀晚餐與夜間散步。',stops:[
@@ -34,11 +34,11 @@ export const days: DayPlan[] = [
   {time:'12:00',title:'VZ567 起飛',description:'關西 KIX → 台北 TPE，預計 14:15 抵達。'}
  ]}
 ];
-export const checklist = [
- {category:'護照與航班',items:['確認護照效期與入境所需文件','確認去程 VZ566 / 回程 VZ567 航班資訊','完成線上報到與行李規定確認']},
- {category:'住宿與交通',items:['抵達前三天查看飯店 Check-in Link 並完成登錄','確認 4 位住客的房間數與行李寄放方式','決定南海電鐵車種並下載地圖／乘車工具']},
- {category:'門票與景點',items:['準備 USJ 門票、Express Pass 與任天堂世界入場安排','查看勝尾寺及京都景點最新公告','確認和服拍攝會合資訊與道頓堀遊船安排']},
- {category:'餐廳與購物',items:['出發前核對餐廳營業時間與公休日','確認需要預約的餐廳及候位安排','整理市場、百貨與購物清單']},
- {category:'網路與電子用品',items:['準備 eSIM / Wi-Fi 與充電器','攜帶行動電源、轉接需求確認','下載離線地圖與重要文件']},
- {category:'衣物與天氣',items:['出發前查看大阪、京都天氣','準備保暖外套與舒適步行鞋','備妥雨具與常用藥品']}
+export const checklist: ChecklistGroup[] = [
+ {stage:'出發前一週',category:'護照與航班',items:['確認護照效期與入境所需文件','確認去程 VZ566 / 回程 VZ567 航班資訊','完成線上報到與行李規定確認']},
+ {stage:'出發前一週',category:'住宿與交通',items:['抵達前三天查看飯店 Check-in Link 並完成登錄','確認 4 位住客的房間數與行李寄放方式','決定南海電鐵車種並下載地圖／乘車工具']},
+ {stage:'出發前一週',category:'門票與景點',items:['準備 USJ 門票、Express Pass 與任天堂世界入場安排','查看勝尾寺及京都景點最新公告','確認和服拍攝會合資訊與道頓堀遊船安排']},
+ {stage:'出發前一天',category:'餐廳與購物',items:['出發前核對餐廳營業時間與公休日','確認需要預約的餐廳及候位安排','整理市場、百貨與購物清單']},
+ {stage:'出門前',category:'網路與電子用品',items:['準備 eSIM / Wi-Fi 與充電器','攜帶行動電源、轉接需求確認','下載離線地圖與重要文件']},
+ {stage:'出發前一天',category:'衣物與天氣',items:['出發前查看大阪、京都天氣','準備保暖外套與舒適步行鞋','備妥雨具與常用藥品']}
 ];

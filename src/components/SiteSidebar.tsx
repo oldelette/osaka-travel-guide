@@ -1,4 +1,4 @@
-import { ChevronRight, X } from 'lucide-react';
+import { ChevronRight, X } from '../icons';
 
 export interface NavigationItem {
   id: string;

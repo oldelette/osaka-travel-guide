@@ -1,6 +1,13 @@
-import { ArrowDown, ArrowUpRight, CalendarDays, Compass } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, CalendarDays, CheckSquare, Compass, Hotel, Ticket, TrainFront, Utensils } from '../icons';
 import { days } from '../data/itinerary';
 import Photo from '../components/Photo';
+
+function todayDayNumber() {
+  const parts = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Taipei', month: '2-digit', day: '2-digit' }).formatToParts(new Date());
+  const month = parts.find((part) => part.type === 'month')?.value;
+  const day = parts.find((part) => part.type === 'day')?.value;
+  return days.find((plan) => plan.date === `${month}.${day}`)?.day;
+}
 
 export default function TripOverview() {
   return (
@@ -44,6 +51,20 @@ export default function TripOverview() {
           ))}
         </div>
       </section>
+
+      <nav className="quick-access" aria-label="快速入口">
+        <div className="quick-access-heading"><span className="section-label">QUICK ACCESS</span><h2>旅途中，快速找到需要的資訊。</h2></div>
+        <div className="quick-access-grid">
+          {[
+            ...(todayDayNumber() ? [{ href: `#day-${todayDayNumber()}`, label: '今日行程', icon: CalendarDays }] : []),
+            { href: '#transit-guide', label: '交通攻略', icon: TrainFront },
+            { href: '#hotel', label: '住宿資訊', icon: Hotel },
+            { href: '#essentials', label: '門票與預約', icon: Ticket },
+            { href: '#food', label: '美食清單', icon: Utensils },
+            { href: '#checklist', label: '出發清單', icon: CheckSquare },
+          ].map(({ href, label, icon: Icon }) => <a href={href} key={label}><Icon size={17} /><span>{label}</span><ArrowUpRight size={14} /></a>)}
+        </div>
+      </nav>
     </>
   );
 }

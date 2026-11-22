@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MapPin } from 'lucide-react';
+import { MapPin } from '../icons';
 
 export default function HotelEntrancePhoto() {
   const [missing, setMissing] = useState(false);

@@ -1,7 +1,8 @@
-import { ExternalLink, MapPin, TrainFront } from 'lucide-react';
+import { ExternalLink, MapPin, TrainFront } from '../icons';
 import { restaurants } from '../data/restaurants';
 import AirportRouteGuide from '../components/AirportRouteGuide';
 import Photo from '../components/Photo';
+import { directionsUrl } from '../data/dayRoutes';
 
 const mapLink = (query: string) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 
@@ -39,10 +40,16 @@ export default function TravelNotes() {
       <article className="guide-panel" id="transit-guide" aria-labelledby="transit-title">
         <span className="section-label">ARRIVAL & TRANSIT NOTES</span>
         <h2 id="transit-title">關西移動筆記</h2>
-        <div className="guide-row"><b>機場 → 飯店</b><p>南海電鐵至難波，轉千日前線一站到日本橋，再由 7 號出口步行約 6–8 分鐘。</p></div>
-        <div className="guide-row"><b>大阪市區</b><p>大阪 Metro 與 JR 可涵蓋多數行程；跨區移動時預留轉乘與步行時間。</p></div>
-        <div className="guide-row"><b>大型行李</b><p>南海難波站轉乘通道較長，建議預留時間並找電梯；Rapi:t 為指定席，適合想先確保座位的旅人。</p></div>
+        <div className="guide-row"><b>京都行程</b><p>清水寺和服拍攝與中午會合時間已固定；景點分散，金閣寺依拍攝結束時間及當日交通彈性取捨。</p></div>
+        <div className="guide-row"><b>大型行李</b><p>四人帶大型行李時，可選 Rapi:t 指定席預留座位；若轉乘 Metro 不便，也可從南海難波直接搭計程車到住宿。</p></div>
         <AirportRouteGuide />
+        <div className="other-routes">
+          <h3>其他每日移動</h3>
+          <a href={directionsUrl(2)} target="_blank" rel="noreferrer"><span><b>DAY 02 · 大阪往返京都</b><small>清水寺 → 拍攝會合點 → 金閣寺；京都市內需轉乘，依時間彈性取捨</small></span><MapPin size={17}/></a>
+          <a href={directionsUrl(3)} target="_blank" rel="noreferrer"><span><b>DAY 03 · 住宿 → USJ</b><small>依 Google Maps 當日列車建議前往 Universal City，回程同路線返回</small></span><MapPin size={17}/></a>
+          <a href={directionsUrl(4)} target="_blank" rel="noreferrer"><span><b>DAY 04 · 勝尾寺與市區</b><small>先去勝尾寺；市場擇一，梅田與中之島依體力安排</small></span><MapPin size={17}/></a>
+          <a href={directionsUrl(5)} target="_blank" rel="noreferrer"><span><b>DAY 05 · 住宿 → 關西機場</b><small>預計 08:00–08:15 離開住宿，目標 09:00–09:30 抵達航廈</small></span><MapPin size={17}/></a>
+        </div>
         <div className="mt-5 flex items-start gap-2 border-t border-[var(--line)] pt-4 text-[9px] leading-6 text-[#737c77]">
           <TrainFront className="mt-1 shrink-0 text-[var(--orange)]" size={15} />
           <p className="m-0">12/27 返台抵達桃園後，搭機場捷運至 A18，再轉台灣高鐵至新竹站；班次與票價出發前確認。</p>

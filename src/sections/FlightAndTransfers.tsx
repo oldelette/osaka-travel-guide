@@ -1,4 +1,4 @@
-import { ExternalLink, MapPin, Plane } from 'lucide-react';
+import { ExternalLink, MapPin, Plane } from '../icons';
 
 const mapLink = (query: string) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 
@@ -8,13 +8,13 @@ export default function FlightAndTransfers() {
       <section className="flight-band grid grid-cols-[auto_1fr_auto_1fr] items-center gap-7 max-[860px]:grid-cols-2 max-[860px]:gap-[18px]" aria-labelledby="flight-title">
         <div className="band-title" id="flight-title"><Plane size={18} /><span>FLIGHT DETAILS</span></div>
         <article className="flight-item">
-          <span>去程 · 12.23（三）｜訂單 H11228</span>
+          <span>去程 · 12.23（三）</span>
           <strong>TPE T1 <i>→</i> KIX T1</strong>
           <small>泰國越捷航空 VZ 566<br />起飛 07:30　抵達 11:00<br />表定飛行時間約 2 小時 30 分</small>
         </article>
         <div className="flight-route" aria-hidden="true">✦</div>
         <article className="flight-item">
-          <span>回程 · 12.27（日）｜訂單 H11229</span>
+          <span>回程 · 12.27（日）</span>
           <strong>KIX T1 <i>→</i> TPE T1</strong>
           <small>泰國越捷航空 VZ 567<br />起飛 12:00　抵達 14:15<br />表定飛行時間約 3 小時 15 分</small>
         </article>

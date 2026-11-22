@@ -1,4 +1,5 @@
-import { ArrowUpRight, CalendarDays, MapPin, TrainFront } from 'lucide-react';
+import { ArrowUpRight, CalendarDays, MapPin, TrainFront } from '../icons';
+import StatusBadge from '../components/StatusBadge';
 
 export default function BeforeYouGo() {
   return (
@@ -9,17 +10,17 @@ export default function BeforeYouGo() {
       </div>
       <div className="essential-grid grid grid-cols-3 gap-3 max-[860px]:grid-cols-2 max-[400px]:grid-cols-1">
         <article className="essential-card transit-card">
-          <TrainFront aria-hidden="true" /><span>ARRIVAL ROUTE</span><h3>機場到飯店</h3>
+          <TrainFront aria-hidden="true" /><span>ARRIVAL ROUTE</span><h3>機場到飯店 <StatusBadge status="confirmed" /></h3>
           <p>南海電鐵至難波，轉千日前線到日本橋，再步行至住宿。</p>
           <a href="#transit-guide">查看逐步交通指南 <ArrowUpRight size={14} /></a>
         </article>
         <article className="essential-card">
-          <MapPin aria-hidden="true" /><span>USJ · DEC 25</span><h3>先確認入園安排</h3>
+          <MapPin aria-hidden="true" /><span>USJ · DEC 25</span><h3>先確認入園安排 <StatusBadge status="pending" /></h3>
           <p>門票、Express Pass、任天堂世界入場方式與優先設施，依官方公告及持有票種確認。</p>
           <a href="https://www.usj.co.jp/web/zh/tw" target="_blank" rel="noreferrer">日本環球影城官方網站 <ArrowUpRight size={14} /></a>
         </article>
         <article className="essential-card">
-          <CalendarDays aria-hidden="true" /><span>SEASONAL · DEC 26</span><h3>冬季活動仍待公告</h3>
+          <CalendarDays aria-hidden="true" /><span>SEASONAL · DEC 26</span><h3>冬季活動仍待公告 <StatusBadge status="pending" /></h3>
           <p>中之島燈飾與中央公會堂投影映射是不同活動，出發前分別確認日期與舉辦時間。</p>
           <small>市場休市日、店家營業時間也請另行確認。</small>
         </article>

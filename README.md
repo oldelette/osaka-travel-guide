@@ -37,7 +37,8 @@ public/images/
   day4/
   day5/
   food/
-    hotel/entrance.jpg.png
+  hotel/
+    entrance.jpg.png
 ```
 
 建議每個行程頁使用橫式、相近比例照片。不要將有授權限制的書籍封面或他人照片直接放進網站。
@@ -52,4 +53,6 @@ public/images/
 
 頁面依用途拆分在 `src/sections/`，共用導覽、照片與機場交通元件位於 `src/components/`。主要版面使用 Tailwind utility classes；雜誌風格的細節與列印樣式保留在 `src/styles.css`。美食店家資料放在 `src/data/restaurants.ts`。
 
-行前清單會保存在目前瀏覽器的 local storage，重新整理頁面後仍會保留勾選狀態。
+每日路線連結定義在 `src/data/dayRoutes.ts`，以 Google Maps 外部導航開啟。首頁快速入口會在旅程日期內顯示當日行程。
+
+行前清單依「出發前一週、出發前一天、出門前」整理，勾選狀態保存在目前瀏覽器的 local storage，重新整理頁面後仍會保留；重設會清除所有勾選。

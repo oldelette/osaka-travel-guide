@@ -1,4 +1,4 @@
-import { ExternalLink, MapPin } from 'lucide-react';
+import { ExternalLink, MapPin } from '../icons';
 import HotelEntrancePhoto from '../components/HotelEntrancePhoto';
 
 const hotelUrl = 'https://apt11.jp/en/stays/0c2842db-e0ed-4abd-8811-15882070ffd0';
