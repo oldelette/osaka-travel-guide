@@ -14,3 +14,5 @@
 .photo-placeholder.has-photo>img{z-index:0}
 .food-photo-wrap{margin-bottom:10px}.food-photo{height:132px;padding:15px}.food-photo>span:not(.photo-mark){font-size:14px!important}.food-photo.has-photo small.photo-credit{font-size:7px}
 @media print{.food-photo{height:35mm}}
+.usj-map-card{display:grid;grid-template-columns:40px 1fr auto;align-items:center;gap:15px;padding:19px 22px;margin:0 0 28px;background:#e9e6dc;border-left:3px solid #bc613d}.usj-map-icon{width:38px;height:38px;display:grid;place-items:center;border:1px solid #c9a38c;color:#a65e3d}.usj-map-copy .section-label{font-size:8px}.usj-map-copy h3{font:500 15px var(--serif);margin:5px 0}.usj-map-copy p{font-size:9px;line-height:1.7;color:#727a74;margin:0}.usj-map-card>a{display:flex;align-items:center;gap:8px;padding:10px 13px;background:var(--navy);color:#fff;text-decoration:none;font-size:9px;white-space:nowrap}.usj-map-card>a:hover{background:#294655}
+@media(max-width:760px){.usj-map-card{grid-template-columns:34px 1fr;gap:11px;padding:15px;margin-bottom:23px}.usj-map-icon{width:32px;height:32px}.usj-map-card>a{grid-column:2;justify-content:center;width:max-content}}
