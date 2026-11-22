@@ -1,35 +1,102 @@
-import { useState } from 'react';
-import { ArrowDown, ArrowUpRight, CalendarDays, Check, ChevronRight, Compass, ExternalLink, MapPin, Menu, Plane, Printer, TrainFront, X } from 'lucide-react';
-import { days, checklist } from './data/itinerary';
-import { photos } from './data/photos';
-import { restaurants } from './data/restaurants';
+import { useEffect, useState } from 'react';
+import { Menu, Printer } from 'lucide-react';
+import SiteSidebar, { type NavigationItem } from './components/SiteSidebar';
+import { days } from './data/itinerary';
+import BeforeYouGo from './sections/BeforeYouGo';
+import ChecklistSection from './sections/ChecklistSection';
+import DailyItinerary from './sections/DailyItinerary';
+import FlightAndTransfers from './sections/FlightAndTransfers';
+import HotelStay from './sections/HotelStay';
+import TravelNotes from './sections/TravelNotes';
+import TripOverview from './sections/TripOverview';
 
-const mapLink = (q: string) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
-const navItems = [{id:'overview',label:'旅程總覽'}, ...days.map(d=>({id:`day-${d.day}`,label:`DAY 0${d.day}｜${d.theme}`})),{id:'essentials',label:'旅遊資訊'},{id:'food',label:'美食名單'},{id:'checklist',label:'出發清單'}];
+const navItems: NavigationItem[] = [
+  { id: 'overview', label: '旅程總覽' },
+  ...days.map((day) => ({ id: `day-${day.day}`, label: `DAY 0${day.day}｜${day.theme}` })),
+  { id: 'essentials', label: '出發前確認' },
+  { id: 'hotel', label: '住宿資訊' },
+  { id: 'transit-guide', label: '關西移動筆記' },
+  { id: 'food', label: '美食名單' },
+  { id: 'checklist', label: '出發清單' },
+];
 
-function Photo({label, className=''}:{label:string;className?:string}) { const asset=photos[label]; return <div className={`photo-placeholder ${className} ${asset?'has-photo':''}`} aria-label={asset?.alt ?? `${label}照片素材待補`}>{asset&&<img src={asset.src} alt={asset.alt} loading={className.includes('hero')?'eager':'lazy'} decoding="async" onError={event=>{event.currentTarget.style.display='none';}}/>}<span className="photo-mark">OSAKA / 2026</span><span>{label}</span>{asset?<small className="photo-credit">攝影 <a href={asset.sourceUrl} target="_blank" rel="noreferrer">{asset.author}</a> · <a href={asset.licenseUrl} target="_blank" rel="noreferrer">{asset.license}</a></small>:<small>照片素材待補｜請放入 public/images</small>}</div>; }
+const checklistStorageKey = 'osaka-travel-guide-checklist-v1';
 
-function HotelEntrancePhoto(){const [missing,setMissing]=useState(false);return <div className="hotel-entrance-photo">{missing?<div className="hotel-photo-fallback"><MapPin size={24}/><span>請將住宿門口照片存為</span><code>public/images/hotel/entrance.jpg</code></div>:<img src={`${import.meta.env.BASE_URL}images/hotel/entrance.jpg`} alt="Apartment Hotel 11 Dotonbori 8 飯店入口" loading="lazy" onError={()=>setMissing(true)}/>}</div>;}
+function loadChecklist(): Record<string, boolean> {
+  try {
+    const stored = window.localStorage.getItem(checklistStorageKey);
+    return stored ? JSON.parse(stored) as Record<string, boolean> : {};
+  } catch {
+    return {};
+  }
+}
 
-export default function App(){
- const [checked,setChecked]=useState<Record<string,boolean>>({}); const [menuOpen,setMenuOpen]=useState(false);
- const toggle=(key:string)=>setChecked(v=>({...v,[key]:!v[key]}));
- const print=()=>window.print();
- return <div className="site-shell">
-  <aside className={`sidebar ${menuOpen?'open':''}`}><div className="brand"><span className="brand-stamp">旅</span><div><b>OSAKA</b><small>TRAVEL GUIDE 2026</small></div><button className="close-menu" onClick={()=>setMenuOpen(false)} aria-label="關閉導覽"><X size={18}/></button></div><div className="side-date">DECEMBER 23 — 27, 2026</div><nav>{navItems.map((n,i)=><a key={n.id} className={i===0?'active':''} href={`#${n.id}`} onClick={()=>setMenuOpen(false)}>{n.label}<ChevronRight size={14}/></a>)}</nav><div className="sidebar-bottom"><span className="dot"/> 4 位旅人・5 天 4 夜</div></aside>
-  {menuOpen&&<button className="scrim" onClick={()=>setMenuOpen(false)} aria-label="關閉選單"/>}
-  <main className="main-content"><header className="topbar"><button className="mobile-menu" onClick={()=>setMenuOpen(true)} aria-label="開啟導覽"><Menu/></button><span>旅程手冊 <i>/</i> 大阪・京都</span><button className="print-button" onClick={print}><Printer size={16}/> 下載 PDF / 列印</button></header>
-   <section className="hero" id="overview"><div className="hero-copy"><div className="eyebrow"><span/> WINTER JOURNEY · JAPAN</div><p className="hero-kicker">一場冬日關西漫遊</p><h1>大阪<span>，</span><br/>慢慢走。</h1><p className="hero-sub">5 天 4 夜經典之旅</p><div className="hero-meta"><span><CalendarDays size={16}/>2026.12.23 — 12.27</span><span><Compass size={16}/>4 位旅人</span></div><a href="#day-1" className="text-link">開始閱讀行程 <ArrowDown size={15}/></a></div><div className="hero-art"><Photo label="道頓堀夜景・大阪城市風光" className="hero-photo"/><div className="vertical-note">OSAKA · KYOTO · WINTER 2026</div><span className="hero-index">01 <i>—</i> 05</span></div><div className="hero-caption">KANSAI, JAPAN <span>34°40′N 135°30′E</span></div></section>
-   <section className="intro-strip"><div><span className="section-label">THE JOURNEY</span><h2>把五天，留給<br/><em>大阪與京都。</em></h2></div><p>從道頓堀的霓虹夜色，到京都巷弄的冬日晨光。這本小小旅手冊，陪你從容走過每一站。行程留有餘白，依當天心情與腳步調整即可。</p><div className="trip-facts"><span><b>05</b> DAYS</span><span><b>04</b> NIGHTS</span><span><b>02</b> CITIES</span></div></section>
-   <section className="overview-section"><div className="section-heading"><div><span className="section-label">AT A GLANCE</span><h2>旅程速覽</h2></div><span className="heading-note">DEC 23 — DEC 27</span></div><div className="day-strip">{days.map(d=><a key={d.day} href={`#day-${d.day}`} className="day-teaser"><span>DAY 0{d.day}</span><b>{d.theme}</b><small>{d.location}</small><ArrowUpRight size={17}/></a>)}</div></section>
-   <section className="flight-band"><div className="band-title"><Plane size={18}/><span>FLIGHT DETAILS</span></div><div className="flight-item"><span>去程 · 12.23（三）｜訂單 H11228</span><strong>TPE T1 <i>→</i> KIX T1</strong><small>泰國越捷航空 VZ 566<br/>起飛 07:30　抵達 11:00<br/>表定飛行時間約 2 小時 30 分</small></div><div className="flight-route">✦</div><div className="flight-item"><span>回程 · 12.27（日）｜訂單 H11229</span><strong>KIX T1 <i>→</i> TPE T1</strong><small>泰國越捷航空 VZ 567<br/>起飛 12:00　抵達 14:15<br/>表定飛行時間約 3 小時 15 分</small></div><div className="flight-foot">航班資訊依提供的訂單內容整理，出發前請以航空公司通知為準。</div></section>
-   <section className="airport-transfer-grid" aria-label="台灣機場接送安排"><article className="transfer-card"><span className="section-label">12.23 · 出發接送</span><h3>竹北 → 桃園機場</h3><p><b>04:30 預約接送出發</b><br/>竹北上車，詳細地址保留在私人行程資訊中。</p><div className="transfer-meta"><span>已預約機場接送</span><strong>總費用 NT$1,800</strong></div></article><article className="transfer-card return-transfer"><span className="section-label">12.27 · 返台接駁</span><h3>桃園機場 → 新竹高鐵站</h3><p><b>預計 14:15 抵達桃園機場 T1</b><br/>搭乘桃園機場捷運至 A18 桃園高鐵站，再轉乘台灣高鐵至新竹站。<br/>目的地：302 新竹縣竹北市高鐵七路 6 號</p><div className="transfer-meta"><span>機捷 A18 → 台灣高鐵新竹站</span><strong>班次、票價待確認</strong></div><a href={mapLink('302新竹縣竹北市高鐵七路6號')} target="_blank" rel="noreferrer"><MapPin size={13}/>查看新竹高鐵站 <ExternalLink size={12}/></a></article></section>
-   {days.map(d=><section className={`day-section day-${d.day}`} id={`day-${d.day}`} key={d.day}><div className="day-heading"><div><span className="section-label">DAY 0{d.day} <i>·</i> {d.date} {d.weekday}</span><h2>{d.theme}</h2><p>{d.location} <span>／</span> OSAKA TRAVEL NOTES</p></div><span className="big-day">0{d.day}</span></div><Photo label={d.image} className="day-photo"/><div className="day-note"><span>✳</span><p>{d.note}</p></div>{d.day===3&&<div className="usj-map-card"><div className="usj-map-icon"><MapPin size={19}/></div><div className="usj-map-copy"><span className="section-label">OFFICIAL PARK MAP</span><h3>先看園區，再安排動線。</h3><p>使用日本環球影城官方互動地圖，放大或移動查看園區、設施與餐飲位置。</p></div><a href="https://www.usj.co.jp/web/zh/tw/service-guide/parkmap" target="_blank" rel="noreferrer"><span>開啟官方互動地圖</span><ExternalLink size={15}/></a></div>}<div className="timeline">{d.stops.map((s,i)=><article className={`stop ${s.optional?'optional':''}`} key={s.title}><div className="stop-time">{s.time}</div><div className="stop-pin"><span/></div><div className="stop-content"><div className="stop-title"><h3>{s.title}</h3>{s.optional&&<small>OPTIONAL</small>}</div><p>{s.description}</p>{s.transit&&<div className="transit"><TrainFront size={15}/><span>{s.transit}</span></div>}{s.map&&<a className="map-link" href={s.map} target="_blank" rel="noreferrer"><MapPin size={14}/>Google 地圖 <ExternalLink size={12}/></a>}</div>{i<d.stops.length-1&&<div className="timeline-line"/>}</article>)}</div></section>)}
-   <section className="essentials" id="essentials"><div className="section-heading"><div><span className="section-label">TRAVEL ESSENTIALS</span><h2>出發前，先收好資訊。</h2></div></div><div className="essential-grid"><article className="essential-card flight-card"><Plane/><span>FLIGHTS</span><h3>來回航班</h3><p>去程 H11228／VZ 566<br/>12/23　TPE T1 07:30 → KIX T1 11:00<br/>回程 H11229／VZ 567<br/>12/27　KIX T1 12:00 → TPE T1 14:15</p><small>泰國越捷航空 · 表定飛行時間 2:30 / 3:15</small></article><article className="essential-card hotel-card"><MapPin/><span>STAY</span><h3>Apartment Hotel<br/>11 Dotonbori 8</h3><p>同一間住宿・共 4 晚<br/>12/23 入住｜12/27 退房</p><a href={mapLink('Apartment Hotel 11 Dotonbori 8')} target="_blank" rel="noreferrer">查看地圖 <ArrowUpRight size={14}/></a></article><article className="essential-card transit-card"><TrainFront/><span>GETTING AROUND</span><h3>關西機場 ⇄ 難波</h3><p>南海電鐵可直達難波；機場巴士可減少搬運行李的轉乘。四人與大型行李可依班次、費用及接送點比較。</p><small>票價、班次與巴士站點請出發前確認。</small></article></div><div className="stations"><b>住宿周邊交通</b><span>難波 Namba</span><span>日本橋 Nipponbashi</span><span>長堀橋 Nagahoribashi</span><small>步行距離與出口請依住宿實際位置及地圖確認</small></div></section>
-   <section className="hotel-details" id="hotel"><div className="hotel-details-heading"><span className="section-label">STAY NOTES · 4 NIGHTS</span><h2>四個晚上，都住在同一間。</h2><p>Apartment Hotel 11 Dotonbori 8　／　2026.12.23 — 12.27</p></div><div className="hotel-details-layout"><HotelEntrancePhoto/><div className="hotel-details-copy"><div className="hotel-rule-grid"><article><b>房間入住人數</b><p>每房最多 2 位住客，其中最多 2 位成人；4 位旅人請依訂房確認內容核對房間數。</p></article><article><b>入住與退房</b><p>入住時段為 16:00 至翌日 06:00；12/27 請於 10:00 前退房。</p></article><article><b>自助入住・無接待櫃台</b><p>請事先聯絡住宿確認入住流程、取房卡／鑰匙或門鎖密碼等說明。</p></article><article><b>護照影本要求</b><p>住宿方要求所有登記住客提供護照影本並留存，請依住宿指示辦理。</p></article><article><b>入住年齡與清潔</b><p>入住旅客須年滿 18 歲。連住期間每 7 天常規清掃一次；其他清潔需求請洽住宿方。</p></article></div><div className="hotel-tax-note"><b>大阪府住宿稅｜每人每晚</b><p>未滿 ¥5,000：免稅　／　¥5,000–未滿 ¥15,000：¥200<br/>¥15,000–未滿 ¥20,000：¥400　／　¥20,000 以上：¥500</p><small>依每人每晚住宿費計算。部分訂房方案未含住宿稅，可能於住宿另收；請核對訂房確認內容。金額與徵收方式以官方及住宿提供資訊為準。</small><a href="https://www.pref.osaka.lg.jp/o070070/toshimiryoku/syukuhakuzei/index.html" target="_blank" rel="noreferrer">大阪府住宿稅官方說明 <ExternalLink size={12}/></a></div></div></div></section>
-   <section className="guide-grid"><article className="guide-panel"><span className="section-label">A LITTLE PRACTICAL</span><h2>關西移動筆記</h2><div className="guide-row"><b>機場 → 難波</b><p>南海電鐵適合想快速直達市區的旅人；機場巴士提供較少轉乘的選項。四人攜帶大型行李，可一併比較接送費用與站點。</p></div><div className="guide-row"><b>市區搭乘</b><p>大阪 Metro 與 JR 可涵蓋多數市區行程；京都日需留意景點分散，預留轉乘與步行時間。</p></div><div className="guide-row"><b>返程接駁</b><p>12/27 14:15 抵達桃園 T1 後，搭機場捷運至 A18 桃園高鐵站，再搭台灣高鐵至新竹站（竹北市高鐵七路 6 號）。班次與票價請出發前確認。</p></div></article><article className="guide-panel food-panel" id="food"><span className="section-label">TASTE OF KANSAI · OSAKA FAVORITES</span><h2>這趟想吃的店。</h2><div className="food-photo-wrap"><Photo label="大阪街頭章魚燒" className="food-photo"/></div><div className="restaurant-list">{restaurants.map((restaurant,index)=><article className="restaurant-item" key={restaurant.japaneseName}><span className="restaurant-index">{String(index+1).padStart(2,'0')}</span><div className="restaurant-main"><div className="restaurant-heading"><b>{restaurant.name}</b><span>{restaurant.category} · {restaurant.area}</span></div><small>{restaurant.japaneseName}</small><p>{restaurant.hours}</p>{restaurant.note&&<em>{restaurant.note}</em>}</div><div className="restaurant-links"><a href={mapLink(`${restaurant.name} ${restaurant.area}`)} target="_blank" rel="noreferrer">地圖 <MapPin size={12}/></a>{restaurant.sourceUrl&&<a href={restaurant.sourceUrl} target="_blank" rel="noreferrer">官方／店舖資訊 <ExternalLink size={12}/></a>}</div></article>)}</div><small className="food-caveat">營業資訊以目前查得資料整理；2026 年 12 月節慶營業、臨時休息與最後點餐時間，請出發前再次確認。</small></article></section>
-   <section className="checklist-section" id="checklist"><div className="section-heading"><div><span className="section-label">BEFORE YOU GO</span><h2>慢慢準備，放心出發。</h2></div><span className="progress-count">{Object.values(checked).filter(Boolean).length} / {checklist.reduce((n,c)=>n+c.items.length,0)} 已完成</span></div><div className="checklist-grid">{checklist.map(group=><article className="check-group" key={group.category}><h3>{group.category}</h3>{group.items.map((item,i)=>{const key=`${group.category}-${i}`;return <label className={checked[key]?'is-checked':''} key={key}><input type="checkbox" checked={!!checked[key]} onChange={()=>toggle(key)}/><span className="custom-check"><Check size={13}/></span>{item}</label>})}</article>)}</div></section>
-   <footer className="footer"><div className="footer-brand">OSAKA <i>TRAVEL GUIDE</i></div><p>把旅程過成，喜歡的樣子。</p><small>2026 WINTER · 大阪・京都　｜　行程與季節活動請以官方最新資訊為準</small><a href="#overview">回到頁首 ↑</a></footer>
-  </main>
- </div>
+export default function App() {
+  const [checked, setChecked] = useState<Record<string, boolean>>(loadChecklist);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('overview');
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(checklistStorageKey, JSON.stringify(checked));
+    } catch {
+      // Checklist remains usable for the current visit when storage is unavailable.
+    }
+  }, [checked]);
+
+  useEffect(() => {
+    const targets = navItems
+      .map((item) => document.getElementById(item.id))
+      .filter((element): element is HTMLElement => element !== null);
+    if (!('IntersectionObserver' in window)) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+      if (visible?.target instanceof HTMLElement) setActiveSection(visible.target.id);
+    }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
+
+    targets.forEach((target) => observer.observe(target));
+    return () => observer.disconnect();
+  }, []);
+
+  const toggleChecklistItem = (key: string) => {
+    setChecked((current) => ({ ...current, [key]: !current[key] }));
+  };
+
+  return (
+    <div className="site-shell">
+      <SiteSidebar
+        items={navItems}
+        activeSection={activeSection}
+        menuOpen={menuOpen}
+        onNavigate={() => setMenuOpen(false)}
+        onClose={() => setMenuOpen(false)}
+      />
+
+      <main className="main-content mx-auto ml-[250px] w-[calc(100%_-_250px)] max-w-[1600px] px-[6.2vw] max-[860px]:ml-0 max-[860px]:w-full max-[860px]:px-[22px] max-[400px]:px-4">
+        <header className="topbar">
+          <button className="mobile-menu" onClick={() => setMenuOpen(true)} aria-label="開啟導覽"><Menu /></button>
+          <span>旅程手冊 <i>/</i> 大阪・京都</span>
+          <button className="print-button" onClick={() => window.print()}><Printer size={16} />下載 PDF / 列印</button>
+        </header>
+
+        <TripOverview />
+        <FlightAndTransfers />
+        <DailyItinerary />
+        <BeforeYouGo />
+        <HotelStay />
+        <TravelNotes />
+        <ChecklistSection checked={checked} onToggle={toggleChecklistItem} />
+
+        <footer className="footer">
+          <div className="footer-brand">OSAKA <i>TRAVEL GUIDE</i></div>
+          <p>把旅程過成，喜歡的樣子。</p>
+          <small>2026 WINTER · 大阪・京都　｜　行程與季節活動請以官方最新資訊為準</small>
+          <a href="#overview">回到頁首 ↑</a>
+        </footer>
+      </main>
+    </div>
+  );
 }

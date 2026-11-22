@@ -37,6 +37,7 @@ public/images/
   day4/
   day5/
   food/
+    hotel/entrance.jpg.png
 ```
 
 建議每個行程頁使用橫式、相近比例照片。不要將有授權限制的書籍封面或他人照片直接放進網站。
@@ -48,3 +49,7 @@ public/images/
 ## 行程資料
 
 行程資料獨立放在 `src/data/itinerary.ts`，型別定義在 `src/types.ts`。季節活動、票價、營業時間、交通班次等可能變動的資訊以待確認方式呈現，出發前請查詢官方公告。
+
+頁面依用途拆分在 `src/sections/`，共用導覽、照片與機場交通元件位於 `src/components/`。主要版面使用 Tailwind utility classes；雜誌風格的細節與列印樣式保留在 `src/styles.css`。美食店家資料放在 `src/data/restaurants.ts`。
+
+行前清單會保存在目前瀏覽器的 local storage，重新整理頁面後仍會保留勾選狀態。

@@ -2,7 +2,7 @@ import type { DayPlan } from '../types';
 const maps = (q: string) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
 export const days: DayPlan[] = [
  { day:1,date:'12.23',weekday:'週三',theme:'大阪經典地標',location:'大阪市區',image:'大阪城與天守閣',note:'抵達日保留彈性。若交通或體力不如預期，優先安排道頓堀晚餐與夜間散步。',stops:[
-  {time:'11:00',title:'抵達關西國際機場',description:'VZ566 抵達 KIX。入境、領取行李後前往難波。',transit:'南海電鐵或機場巴士；四人與大型行李可比較直達巴士及預約接送。',map:maps('Kansai International Airport')},
+  {time:'11:00',title:'抵達關西國際機場',description:'VZ566 抵達 KIX T1。入境、領取行李後搭南海電鐵至難波，轉大阪 Metro 千日前線一站至日本橋，再步行到住宿附近。',transit:'推薦路線詳見「關西移動筆記」；入境、領行李與候車時間另計。',map:maps('Kansai International Airport')},
   {time:'約 13:00',title:'難波寄放行李',description:'先前往 Apartment Hotel 11 Dotonbori 8 寄放行李；能否提前寄放請事先向住宿確認。',map:maps('Apartment Hotel 11 Dotonbori 8')},
   {time:'午後',title:'大阪城',description:'漫步大阪城公園，天守閣入場資訊與營業時間出發前確認。',transit:'由難波搭乘大阪 Metro 前往谷町四丁目或森之宮。',map:maps('大阪城')},
   {time:'傍晚',title:'新世界・通天閣',description:'感受復古街區氣氛，串炸可依現場候位狀況選擇。',transit:'大阪城一帶搭車前往動物園前／惠美須町。',map:maps('通天閣')},
@@ -29,15 +29,16 @@ export const days: DayPlan[] = [
   {time:'晚上',title:'中之島冬季燈飾（待確認）',description:'另行確認 2026 活動日期與點燈時間。中央公會堂投影映射為另一項活動，不預設 12/26 仍舉行。',map:maps('中之島公會堂')}
  ]},
  {day:5,date:'12.27',weekday:'週日',theme:'收拾行李・返程',location:'大阪 → 台北',image:'關西機場出境大廳',note:'返程日不安排觀光。建議依行李、交通與報到需求預留充足時間。',stops:[
-  {time:'08:00–08:15',title:'飯店出發',description:'辦理退房，前往關西國際機場。交通方式與班次出發前再次確認。',transit:'南海電鐵、機場巴士或預約接送；四人行李較多時比較門到門便利性。',map:maps('Apartment Hotel 11 Dotonbori 8')},
+  {time:'08:00–08:15',title:'飯店出發',description:'辦理退房，前往關西國際機場。以 09:00–09:30 抵達 KIX T1 為目標，預留交通與報到時間。',transit:'可搭千日前線一站至難波，再轉南海電鐵；四人行李較多也可評估預約接送。',map:maps('Apartment Hotel 11 Dotonbori 8')},
   {time:'09:00–09:30',title:'抵達關西機場',description:'預留報到、托運、安檢與出境時間。',map:maps('Kansai International Airport')},
   {time:'12:00',title:'VZ567 起飛',description:'關西 KIX → 台北 TPE，預計 14:15 抵達。'}
  ]}
 ];
 export const checklist = [
  {category:'護照與航班',items:['確認護照效期與入境所需文件','確認去程 VZ566 / 回程 VZ567 航班資訊','完成線上報到與行李規定確認']},
- {category:'住宿與交通',items:['確認住宿地址、入住方式與寄放行李','下載交通乘車與地圖工具','確認機場往返方式及行李安排']},
- {category:'門票與景點',items:['準備 USJ 門票與入園安排','查看勝尾寺、京都景點最新公告','確認道頓堀遊船是否需要預約']},
+ {category:'住宿與交通',items:['抵達前三天查看飯店 Check-in Link 並完成登錄','確認 4 位住客的房間數與行李寄放方式','決定南海電鐵車種並下載地圖／乘車工具']},
+ {category:'門票與景點',items:['準備 USJ 門票、Express Pass 與任天堂世界入場安排','查看勝尾寺及京都景點最新公告','確認和服拍攝會合資訊與道頓堀遊船安排']},
+ {category:'餐廳與購物',items:['出發前核對餐廳營業時間與公休日','確認需要預約的餐廳及候位安排','整理市場、百貨與購物清單']},
  {category:'網路與電子用品',items:['準備 eSIM / Wi-Fi 與充電器','攜帶行動電源、轉接需求確認','下載離線地圖與重要文件']},
  {category:'衣物與天氣',items:['出發前查看大阪、京都天氣','準備保暖外套與舒適步行鞋','備妥雨具與常用藥品']}
 ];
