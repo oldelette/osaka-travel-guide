@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Menu, Printer } from './icons';
 import SiteSidebar, { type NavigationItem } from './components/SiteSidebar';
+import PwaExperience from './components/PwaExperience';
 import { checklist, days } from './data/itinerary';
 import BeforeYouGo from './sections/BeforeYouGo';
 import ChecklistSection from './sections/ChecklistSection';
@@ -60,6 +61,7 @@ export default function App() {
 
   return (
     <div className="site-shell">
+      <PwaExperience />
       <SiteSidebar items={navItems} activeSection={activeSection} menuOpen={menuOpen} onNavigate={() => setMenuOpen(false)} onClose={() => setMenuOpen(false)} />
       <main className="main-content mx-auto ml-[250px] w-[calc(100%_-_250px)] max-w-[1600px] px-[6.2vw] max-[860px]:ml-0 max-[860px]:w-full max-[860px]:px-[22px] max-[400px]:px-4">
         <header className="topbar">
