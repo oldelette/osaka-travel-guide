@@ -3,7 +3,7 @@ const maps = (q: string) => `https://www.google.com/maps/search/?api=1&query=${e
 const dotonboriHotelLocation = { latitude: 34.670605, longitude: 135.506325 };
 export const days: DayPlan[] = [
  { day:1,date:'12.23',weekday:'週三',theme:'大阪經典地標',location:'大阪市區',image:'大阪城與天守閣',note:'抵達日保留彈性。若交通或體力不如預期，優先安排道頓堀晚餐與夜間散步。',stops:[
-  {time:'11:00',title:'抵達關西國際機場',category:'機場',latitude:34.4273,longitude:135.2440,description:'VZ566 抵達 KIX T1。入境、領取行李後搭南海電鐵至難波，轉大阪 Metro 千日前線一站至日本橋，再步行到住宿附近。',transit:'推薦路線詳見「關西移動筆記」；入境、領行李與候車時間另計。',map:maps('Kansai International Airport')},
+  {time:'09:30',title:'抵達關西國際機場',category:'機場',latitude:34.4273,longitude:135.2440,description:'漢恩航空系統 H11228 抵達 KIX T1。入境、領取行李後搭南海電鐵至難波，轉大阪 Metro 千日前線一站至日本橋，再步行到住宿附近。',transit:'推薦路線詳見「關西移動筆記」；入境、領行李與候車時間另計。',map:maps('Kansai International Airport')},
   {time:'約 13:00',title:'難波寄放行李',category:'住宿',...dotonboriHotelLocation,description:'先前往 Apartment Hotel 11 Dotonbori 8 寄放行李；能否提前寄放請事先向住宿確認。',map:maps('Apartment Hotel 11 Dotonbori 8')},
   {time:'午後',title:'大阪城',nameEn:'Osaka Castle',category:'歷史古蹟',latitude:34.6873,longitude:135.5262,description:'漫步大阪城公園，天守閣入場資訊與營業時間出發前確認。',transit:'由難波搭乘大阪 Metro 前往谷町四丁目或森之宮。',map:maps('大阪城')},
   {time:'傍晚',title:'新世界・通天閣',nameEn:'Tsutenkaku Tower',category:'街區地標',latitude:34.6525,longitude:135.5063,description:'感受復古街區氣氛，串炸可依現場候位狀況選擇。',transit:'大阪城一帶搭車前往動物園前／惠美須町。',map:maps('通天閣')},
@@ -36,7 +36,7 @@ export const days: DayPlan[] = [
  ]}
 ];
 export const checklist: ChecklistGroup[] = [
- {stage:'出發前一週',category:'護照與航班',items:['確認護照效期與入境所需文件','確認去程 VZ566 / 回程 VZ567 航班資訊','完成線上報到與行李規定確認']},
+ {stage:'出發前一週',category:'護照與航班',items:['確認護照效期與入境所需文件','確認去程 H11228 / 回程 VZ567 航班資訊','完成線上報到與行李規定確認']},
  {stage:'出發前一週',category:'住宿與交通',items:['抵達前三天查看飯店 Check-in Link 並完成登錄','確認 4 位住客的房間數與行李寄放方式','決定南海電鐵車種並下載地圖／乘車工具']},
  {stage:'出發前一週',category:'門票與景點',items:['準備 USJ 門票、Express Pass 與任天堂世界入場安排','查看勝尾寺及京都景點最新公告','確認和服拍攝會合資訊與道頓堀遊船安排']},
  {stage:'出發前一天',category:'餐廳與購物',items:['出發前核對餐廳營業時間與公休日','確認需要預約的餐廳及候位安排','整理市場、百貨與購物清單']},
