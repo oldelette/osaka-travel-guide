@@ -58,11 +58,10 @@ export default function TripOverview() {
           <a href="#day-1" className="text-link">開始閱讀行程 <ArrowDown size={15} /></a>
         </div>
         <div className="hero-art relative px-[35px] py-[6px] pb-[30px] max-[860px]:px-0 max-[860px]:pb-[25px]">
-          <Photo key={heroPhotoIndex} label={heroPhotos[heroPhotoIndex]} className="hero-photo h-[410px] max-[860px]:h-[290px] max-[400px]:h-[250px]" />
+          <Photo key={heroPhotoIndex} label={heroPhotos[heroPhotoIndex]} showLabel={false} className="hero-photo h-[410px] max-[860px]:h-[290px] max-[400px]:h-[250px]" />
           <div className="vertical-note">OSAKA · KYOTO · WINTER 2026</div>
           <span className="hero-index">0{heroPhotoIndex + 1} <i>—</i> 05</span>
         </div>
-        <div className="hero-caption">KANSAI, JAPAN <span>34°40′N 135°30′E</span></div>
       </section>
 
       <section className="intro-strip grid grid-cols-[1fr_1.2fr_.75fr] items-center gap-10 py-[45px] max-[860px]:grid-cols-2 max-[860px]:gap-[17px] max-[860px]:py-8 max-[400px]:grid-cols-1">

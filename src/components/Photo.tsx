@@ -3,9 +3,10 @@ import { photos } from '../data/photos';
 interface PhotoProps {
   label: string;
   className?: string;
+  showLabel?: boolean;
 }
 
-export default function Photo({ label, className = '' }: PhotoProps) {
+export default function Photo({ label, className = '', showLabel = true }: PhotoProps) {
   const asset = photos[label];
 
   return (
@@ -20,7 +21,7 @@ export default function Photo({ label, className = '' }: PhotoProps) {
         />
       )}
       <span className="photo-mark">OSAKA / 2026</span>
-      <span>{label}</span>
+      {showLabel && <span>{label}</span>}
       {asset ? (
         <small className="photo-credit">
           攝影 <a href={asset.sourceUrl} target="_blank" rel="noreferrer">{asset.author}</a>

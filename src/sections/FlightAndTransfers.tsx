@@ -10,7 +10,7 @@ export default function FlightAndTransfers() {
         <article className="flight-item">
           <span>去程 · 12.23（三）</span>
           <strong>TPE T1 <i>→</i> KIX T1</strong>
-          <small>漢恩航空系統 H11228 · 經濟艙 · 波音 737<br />起飛 06:05　抵達 09:30</small>
+          <small>泰國越捷航空 VZ566 · 經濟艙 · 波音 737<br />起飛 06:05　抵達 09:30</small>
         </article>
         <div className="flight-route" aria-hidden="true">✦</div>
         <article className="flight-item">
@@ -25,8 +25,8 @@ export default function FlightAndTransfers() {
         <article className="transfer-card">
           <span className="section-label">12.23 · 出發接送</span>
           <h3>竹北 → 桃園機場</h3>
-          <p><b>03:00 預約接送出發</b><br />從竹北住處搭乘已預約機場接送。</p>
-          <div className="transfer-meta"><span>已預約機場接送</span><strong>總費用 NT$1,900</strong></div>
+          <p><b>03:00 預約接送出發</b><br />從竹北住處搭乘已預約機場接送。<br />預約登記航班：VZ566<br />車型：Toyota Sienna（黑色）</p>
+          <div className="transfer-meta"><span>車資 NT$1,600<br />夜間加成 NT$300</span><strong>合計 NT$1,900</strong></div>
         </article>
         <article className="transfer-card return-transfer">
           <span className="section-label">12.27 · 返台接駁</span>
