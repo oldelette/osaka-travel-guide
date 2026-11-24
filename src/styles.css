@@ -59,3 +59,11 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid #a65e
 @media(max-width:860px){.daily-map-experience{display:flex;flex-direction:column;gap:0}.daily-map-experience>.daily-map-section{order:-1;position:static;max-height:none;overflow:visible;width:100%;padding:43px 0 50px;border-top:1px solid var(--line)}.daily-map-experience .daily-map-heading h2{font-size:27px}.daily-map-experience .heading-note{max-width:none;text-align:left}.daily-map-experience .map-day-tabs button{min-height:52px;flex-direction:column}.daily-map-experience .map-day-tabs button span,.daily-map-experience .map-day-tabs button small{font-size:11px}.daily-map-experience .daily-map-theme{font-size:17px}.daily-map-experience .map-place-list{max-height:380px;border-right:0}.daily-map-experience .daily-map-canvas{height:clamp(240px,36vh,340px);min-height:240px;max-height:340px}.daily-map-experience .map-transport-note{font-size:13px}}
 .daily-map-canvas{position:relative;width:100%}.daily-map-experience .daily-map-frame{overflow:hidden}.daily-map-experience>.daily-map-section{max-height:none;overflow:visible}
 @media(max-width:860px){.map-zoom-controls button{width:44px;height:44px;min-height:44px}.itinerary-marker{width:44px;height:44px;min-height:44px}}
+
+:root{--reading-size:14px;--supporting-size:12px;--label-size:11px}
+.main-content :is(p,li,label){font-size:var(--reading-size);line-height:1.8}
+.main-content small{font-size:var(--supporting-size)}
+.main-content :is(.section-label,.eyebrow){font-size:var(--label-size)}
+.main-content :is(.topbar,.hero-meta,.stop-time,.map-link,.heading-note,.day-teaser>span,.day-teaser small,.day-heading p,.map-place-copy small,.map-pending,.map-day-tabs button small){font-size:var(--supporting-size)}
+.main-content .stop-title h3{font-size:18px}
+@media(max-width:860px){:root{--reading-size:16px;--supporting-size:14px;--label-size:12px}.main-content .stop-title h3{font-size:17px}}
