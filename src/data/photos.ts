@@ -5,9 +5,55 @@ export interface PhotoAsset {
   license: string;
   licenseUrl: string;
   sourceUrl: string;
+  changes?: string;
 }
 
 export const photos: Record<string, PhotoAsset> = {
+  '道頓堀運河午後景色': {
+    src: `${import.meta.env.BASE_URL}images/home/dotonbori-evening.jpg`,
+    alt: '午後的大阪道頓堀運河與兩側街景',
+    author: 'inunami',
+    license: 'CC BY 2.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by/2.0/',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:Dotonbori_20221026161357.jpg',
+    changes: '縮圖與版型裁切',
+  },
+  '夜色中的大阪城': {
+    src: `${import.meta.env.BASE_URL}images/home/osaka-castle-night.jpg`,
+    alt: '夜色中點燈的大阪城天守閣',
+    author: 'Manish Prabhune',
+    license: 'CC BY-SA 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:Osaka_Castle_-_Japan.jpg',
+    changes: '縮圖與版型裁切',
+  },
+  '夏日清水寺本堂': {
+    src: `${import.meta.env.BASE_URL}images/home/kiyomizu-summer.jpg`,
+    alt: '夏日綠意中的京都清水寺本堂',
+    author: 'Vinodmp',
+    license: 'CC BY-SA 3.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:Kiyomizu_dera_in_Kyoto.JPG',
+    changes: '縮圖與版型裁切',
+  },
+  '日本環球影城入口': {
+    src: `${import.meta.env.BASE_URL}images/home/usj-entrance.jpg`,
+    alt: '日本環球影城入口拱門與入園遊客',
+    author: 'Tokumeigakarinoaoshima',
+    license: 'CC0 1.0',
+    licenseUrl: 'https://creativecommons.org/publicdomain/zero/1.0/',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:UNIVERSAL_STUDIOS_JAPAN_ENTRANCE.jpg',
+    changes: '縮圖與版型裁切',
+  },
+  '箕面勝尾寺本堂': {
+    src: `${import.meta.env.BASE_URL}images/home/katsuoji-temple.jpg`,
+    alt: '箕面勝尾寺森林中的木造本堂',
+    author: 'Hyppolyte de Saint-Rambert',
+    license: 'CC BY 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:Katsuō-ji_(Minoh_Osaka)_Temple_hdsr_S5_nk06.jpg',
+    changes: '縮圖與版型裁切',
+  },
   '道頓堀夜景・大阪城市風光': {
     src: `${import.meta.env.BASE_URL}images/cover/dotonbori.jpg`,
     alt: '夜晚的道頓堀河畔與霓虹招牌',

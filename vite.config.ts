@@ -34,6 +34,7 @@ export default defineConfig({
           '**/images/day3/usj.jpg',
           '**/images/day4/katsuoji-daruma.jpg',
           '**/images/day5/kix-terminal.jpg',
+          '**/images/home/*.jpg',
         ],
         runtimeCaching: [
           {

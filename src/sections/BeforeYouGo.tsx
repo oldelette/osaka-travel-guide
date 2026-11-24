@@ -1,4 +1,4 @@
-import { ArrowUpRight, CalendarDays, MapPin, TrainFront } from '../icons';
+import { ArrowUpRight, CalendarDays, MapPin, Plane, TrainFront } from '../icons';
 import StatusBadge from '../components/StatusBadge';
 
 export default function BeforeYouGo() {
@@ -8,11 +8,16 @@ export default function BeforeYouGo() {
         <div><span className="section-label">BEFORE YOU GO</span><h2 id="essentials-title">出發前，確認這幾件事。</h2></div>
         <span className="heading-note">CHECK OFFICIAL UPDATES</span>
       </div>
-      <div className="essential-grid grid grid-cols-3 gap-3 max-[860px]:grid-cols-2 max-[400px]:grid-cols-1">
+      <div className="essential-grid grid grid-cols-4 gap-3 max-[1100px]:grid-cols-2 max-[400px]:grid-cols-1">
         <article className="essential-card transit-card">
           <TrainFront aria-hidden="true" /><span>ARRIVAL ROUTE</span><h3>機場到飯店 <StatusBadge status="confirmed" /></h3>
           <p>南海電鐵至難波，轉千日前線到日本橋，再步行至住宿。</p>
           <a href="#transit-guide">查看逐步交通指南 <ArrowUpRight size={14} /></a>
+        </article>
+        <article className="essential-card">
+          <Plane aria-hidden="true" /><span>JAPAN ENTRY · BEFORE DEPARTURE</span><h3>完成 Visit Japan Web 登錄 <StatusBadge status="important" /></h3>
+          <p>先備妥護照、去回程航班與住宿資料，登錄旅客資訊及入境計畫，再填寫入境審查與海關申報。完成後在手機開啟二維碼，抵達關西機場時出示。</p>
+          <a href="https://services.digital.go.jp/zh-cmn-hant/visit-japan-web/" target="_blank" rel="noreferrer">Visit Japan Web 官方說明 <ArrowUpRight size={14} /></a>
         </article>
         <article className="essential-card">
           <MapPin aria-hidden="true" /><span>USJ · DEC 25</span><h3>先確認入園安排 <StatusBadge status="pending" /></h3>

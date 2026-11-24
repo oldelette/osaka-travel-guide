@@ -1,6 +1,19 @@
+import { useEffect, useState } from 'react';
 import { ArrowDown, ArrowUpRight, CalendarDays, CheckSquare, Compass, Hotel, Ticket, TrainFront, Utensils } from '../icons';
 import { days } from '../data/itinerary';
 import Photo from '../components/Photo';
+
+const heroPhotos = [
+  '道頓堀運河午後景色',
+  '夜色中的大阪城',
+  '夏日清水寺本堂',
+  '日本環球影城入口',
+  '箕面勝尾寺本堂',
+];
+
+function currentHeroPhotoIndex() {
+  return new Date().getHours() % heroPhotos.length;
+}
 
 function todayDayNumber() {
   const parts = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Taipei', month: '2-digit', day: '2-digit' }).formatToParts(new Date());
@@ -10,6 +23,26 @@ function todayDayNumber() {
 }
 
 export default function TripOverview() {
+  const [heroPhotoIndex, setHeroPhotoIndex] = useState(currentHeroPhotoIndex);
+
+  useEffect(() => {
+    const updatePhoto = () => setHeroPhotoIndex(currentHeroPhotoIndex());
+    const nextHour = new Date();
+    nextHour.setHours(nextHour.getHours() + 1, 0, 0, 0);
+    let interval = 0;
+    const timeout = window.setTimeout(() => {
+      updatePhoto();
+      interval = window.setInterval(updatePhoto, 60 * 60 * 1000);
+    }, nextHour.getTime() - Date.now());
+    document.addEventListener('visibilitychange', updatePhoto);
+
+    return () => {
+      window.clearTimeout(timeout);
+      window.clearInterval(interval);
+      document.removeEventListener('visibilitychange', updatePhoto);
+    };
+  }, []);
+
   return (
     <>
       <section className="hero relative grid min-h-[545px] grid-cols-[43%_57%] py-[58px] pb-[42px] max-[860px]:min-h-0 max-[860px]:grid-cols-1 max-[860px]:py-[34px] max-[860px]:pb-[48px]" id="overview">
@@ -25,9 +58,9 @@ export default function TripOverview() {
           <a href="#day-1" className="text-link">開始閱讀行程 <ArrowDown size={15} /></a>
         </div>
         <div className="hero-art relative px-[35px] py-[6px] pb-[30px] max-[860px]:px-0 max-[860px]:pb-[25px]">
-          <Photo label="道頓堀夜景・大阪城市風光" className="hero-photo h-[410px] max-[860px]:h-[290px] max-[400px]:h-[250px]" />
+          <Photo key={heroPhotoIndex} label={heroPhotos[heroPhotoIndex]} className="hero-photo h-[410px] max-[860px]:h-[290px] max-[400px]:h-[250px]" />
           <div className="vertical-note">OSAKA · KYOTO · WINTER 2026</div>
-          <span className="hero-index">01 <i>—</i> 05</span>
+          <span className="hero-index">0{heroPhotoIndex + 1} <i>—</i> 05</span>
         </div>
         <div className="hero-caption">KANSAI, JAPAN <span>34°40′N 135°30′E</span></div>
       </section>

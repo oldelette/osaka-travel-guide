@@ -25,6 +25,7 @@ export default function Photo({ label, className = '' }: PhotoProps) {
         <small className="photo-credit">
           攝影 <a href={asset.sourceUrl} target="_blank" rel="noreferrer">{asset.author}</a>
           {' · '}<a href={asset.licenseUrl} target="_blank" rel="noreferrer">{asset.license}</a>
+          {asset.changes && ` · ${asset.changes}`}
         </small>
       ) : (
         <small>照片素材待補｜請放入 public/images</small>
