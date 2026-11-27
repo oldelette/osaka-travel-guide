@@ -70,6 +70,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid #a65e
 @media(max-width:860px){:root{--reading-size:16px;--supporting-size:14px;--label-size:12px}.main-content .stop-title h3{font-size:17px}}
 
 .topbar-actions{display:flex;flex:1;align-items:center;justify-content:flex-end;gap:9px}
+.topbar{position:sticky;top:0;z-index:12;background:var(--paper)}
 .inline-search{display:flex;align-items:center;gap:8px;width:min(340px,40vw);height:40px;padding:0 9px;border:1px solid #c9c4b8;background:#f8f5ed;color:#9d674d}
 .inline-search>svg{flex:none}
 .inline-search input{width:100%;min-width:0;border:0;outline:0;background:transparent;color:var(--navy);font:12px 'Noto Sans TC',sans-serif}
@@ -81,3 +82,5 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid #a65e
 @media(max-width:860px){.topbar{gap:9px;height:auto;min-height:64px;flex-wrap:wrap;padding:10px 0}.topbar>span{display:none}.topbar-actions{justify-content:stretch;gap:8px}.inline-search{width:auto;flex:1;height:48px}.inline-search input{font-size:16px}.inline-search>button{width:44px;min-height:44px;padding:0}.topbar .print-button{width:44px;height:44px;min-height:44px;justify-content:center;padding:0;font-size:0}}
 @media(max-width:400px){.inline-search>button{width:44px;padding:0}.inline-search>button svg,.topbar .print-button svg{flex:none}}
 @media print{.inline-search{display:none!important}}
+html{scroll-padding-top:88px}
+@media(max-width:860px){html{scroll-padding-top:72px}}

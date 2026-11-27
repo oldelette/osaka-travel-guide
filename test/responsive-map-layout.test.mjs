@@ -83,6 +83,14 @@ test('search input avoids iOS focus zoom on mobile and keeps desktop sizing', ()
   assert.equal(declarations('.topbar .print-button', 390).get('font-size'), '0');
 });
 
+test('top bar with search stays visible while scrolling on desktop and mobile', () => {
+  assert.equal(declarations('.topbar', 1440).get('position'), 'sticky');
+  assert.equal(declarations('.topbar', 1440).get('top'), '0');
+  assert.equal(declarations('.topbar', 390).get('position'), 'sticky');
+  assert.equal(declarations('html', 1440).get('scroll-padding-top'), '88px');
+  assert.equal(declarations('html', 390).get('scroll-padding-top'), '72px');
+});
+
 test('search submits the query to Google in a new tab instead of filtering guide content', () => {
   assert.match(app, /action="https:\/\/www\.google\.com\/search"/);
   assert.match(app, /method="get" target="_blank"/);
