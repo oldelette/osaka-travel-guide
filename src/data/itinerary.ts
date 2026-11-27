@@ -17,9 +17,9 @@ export const days: DayPlan[] = [
   {time:'拍攝結束後',title:'東山散步（彈性）',category:'街區散步',latitude:34.9986,longitude:135.7800,description:'若拍攝時間與體力允許，再逛二年坂、三年坂或找抹茶甜點；依攝影師拍攝時長決定，不另外排遠距離景點。',map:maps('二年坂 京都')},
   {time:'傍晚',title:'返回大阪',category:'住宿周邊',...dotonboriHotelLocation,description:'拍攝與東山散步結束後搭車回大阪，晚餐安排在住宿周邊。',transit:'回程路線與班次依結束時間確認。',map:maps('Apartment Hotel 11 Dotonbori 8')}
  ]},
- {day:3,date:'12.25',weekday:'週五',theme:'日本環球影城 USJ',location:'此花區',image:'日本環球影城園區',note:'全天留給 USJ，不安排其他市區景點。開園時間、聖誕季活動及入園規則皆需以官方公告確認。',stops:[
-  {time:'出發前',title:'入園準備清單',category:'入園準備',latitude:34.6654,longitude:135.4323,description:'確認門票、是否需要 Express Pass、Super Nintendo World 入場安排、開園時間與優先設施。',map:maps('Universal Studios Japan')},
-  {time:'全天',title:'Universal Studios Japan',nameEn:'Universal Studios Japan',category:'主題樂園',latitude:34.6654,longitude:135.4323,description:'哈利波特魔法世界、Super Nintendo World 與季節活動依當日營運及票種安排。',transit:'由難波搭乘電車前往 Universal City；預留轉乘與入園安檢時間。',map:maps('Universal Studios Japan')},
+ {day:3,date:'12.25',weekday:'週五',theme:'日本環球影城 USJ',location:'此花區',image:'日本環球影城園區',note:'已購買 2 張成人一日通行證，未購買快速通關。全天留給 USJ，不安排其他市區景點；開園時間、設施運轉與入園規則依官方公告確認。',stops:[
+  {time:'出發前',title:'入園準備清單',category:'已購票・無快速通關',latitude:34.6654,longitude:135.4323,description:'已購買日本環球影城成人一日通行證 2 張，未購買 Express Pass。出發前將電子票券與哈蜜熊爆米花桶兌換券存入手機；確認開園時間、官方 App 與超級任天堂世界入場方式。',map:maps('Universal Studios Japan')},
+  {time:'全天',title:'Universal Studios Japan',nameEn:'Universal Studios Japan',category:'主題樂園',latitude:34.6654,longitude:135.4323,description:'持成人一日通行證入園，未購買快速通關；設施依一般排隊動線安排。哈利波特魔法世界、Super Nintendo World 與季節活動依當日營運及園區公告安排。另附哈蜜熊爆米花桶兌換券，可於園內販售車或店舖營業時間兌換。',transit:'由難波搭乘電車前往 Universal City；預留轉乘與入園安檢時間。',map:maps('Universal Studios Japan')},
   {time:'晚間',title:'Universal CityWalk',nameEn:'Universal CityWalk Osaka',category:'餐飲・購物',latitude:34.6677,longitude:135.4380,description:'園外餐飲與商店可作為離園後選擇，營業資訊待確認。',map:maps('Universal CityWalk Osaka')}
  ]},
  {day:4,date:'12.26',weekday:'週六',theme:'勝尾寺・城市購物',location:'箕面・大阪市區',image:'勝尾寺的達摩祈願',note:'勝尾寺安排在早上。黑門市場與木津市場二選一；梅田依體力挑選購物點。中之島燈光活動與投影映射為不同活動，2026 年資訊均待官方公告確認。',stops:[
@@ -38,7 +38,7 @@ export const days: DayPlan[] = [
 export const checklist: ChecklistGroup[] = [
  {stage:'出發前一週',category:'護照與航班',items:['確認護照效期與入境所需文件','確認去程 VZ566 / 回程 VZ567 航班資訊','完成線上報到與行李規定確認','Visit Japan Web：登錄旅客資料與入境計畫，完成入境審查及海關申報']},
  {stage:'出發前一週',category:'住宿與交通',items:['抵達前三天查看飯店 Check-in Link 並完成登錄','確認 4 位住客的房間數與行李寄放方式','決定南海電鐵車種並下載地圖／乘車工具']},
- {stage:'出發前一週',category:'門票與景點',items:['準備 USJ 門票、Express Pass 與任天堂世界入場安排','查看勝尾寺及京都景點最新公告','確認和服拍攝會合資訊與道頓堀遊船安排']},
+ {stage:'出發前一週',category:'門票與景點',items:['將 USJ 電子票券及哈蜜熊爆米花桶兌換券存入手機，確認官方 App 與任天堂世界入場安排','查看勝尾寺及京都景點最新公告','確認和服拍攝會合資訊與道頓堀遊船安排']},
  {stage:'出發前一天',category:'餐廳與購物',items:['出發前核對餐廳營業時間與公休日','確認需要預約的餐廳及候位安排','整理市場、百貨與購物清單']},
  {stage:'出門前',category:'網路與電子用品',items:['準備 eSIM / Wi-Fi 與充電器','攜帶行動電源、轉接需求確認','下載離線地圖與重要文件']},
  {stage:'出發前一天',category:'衣物與天氣',items:['出發前查看大阪、京都天氣','準備保暖外套與舒適步行鞋','備妥雨具與常用藥品']}
