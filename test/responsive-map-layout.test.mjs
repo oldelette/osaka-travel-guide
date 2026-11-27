@@ -4,6 +4,7 @@ import test from 'node:test';
 import postcss from 'postcss';
 
 const css = postcss.parse(readFileSync(new URL('../src/styles.css', import.meta.url), 'utf8'));
+const app = readFileSync(new URL('../src/App.tsx', import.meta.url), 'utf8');
 
 function mediaApplies(params, width) {
   const max = params.match(/max-width\s*:\s*(\d+)px/);
@@ -75,4 +76,11 @@ test('map controls and markers keep usable touch targets at both breakpoints', (
 test('search input avoids iOS focus zoom on mobile and keeps desktop sizing', () => {
   assert.equal(declarations('.inline-search input', 390).get('font-size'), '16px');
   assert.equal(declarations('.inline-search input', 1440).get('font'), "12px 'Noto Sans TC',sans-serif");
+});
+
+test('search submits the query to Google in a new tab instead of filtering guide content', () => {
+  assert.match(app, /action="https:\/\/www\.google\.com\/search"/);
+  assert.match(app, /method="get" target="_blank"/);
+  assert.match(app, /type="search" name="q"/);
+  assert.doesNotMatch(app, /searchItems|searchResults/);
 });
