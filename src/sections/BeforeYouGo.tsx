@@ -20,8 +20,8 @@ export default function BeforeYouGo() {
           <a href="https://services.digital.go.jp/zh-cmn-hant/visit-japan-web/" target="_blank" rel="noreferrer">Visit Japan Web 官方說明 <ArrowUpRight size={14} /></a>
         </article>
         <article className="essential-card">
-          <MapPin aria-hidden="true" /><span>USJ · DEC 25</span><h3>一日券已購買 × 2 <StatusBadge status="confirmed" /></h3>
-          <p>已購買 2 張成人一日通行證，未購買快速通關。出發前將電子票券及哈蜜熊爆米花桶兌換券存入手機，並確認開園時間、設施運轉與任天堂世界入場方式。</p>
+          <MapPin aria-hidden="true" /><span>USJ · DEC 25</span><h3>一日券已購買 × 4 <StatusBadge status="confirmed" /></h3>
+          <p>已購買 4 張成人一日通行證，未購買快速通關。出發前將電子票券及哈蜜熊爆米花桶兌換券存入手機，並確認開園時間、設施運轉與任天堂世界入場方式。</p>
           <a href="https://www.usj.co.jp/web/zh/tw" target="_blank" rel="noreferrer">日本環球影城官方網站 <ArrowUpRight size={14} /></a>
         </article>
         <article className="essential-card">

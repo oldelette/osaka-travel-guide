@@ -17,8 +17,8 @@ export const days: DayPlan[] = [
   {time:'拍攝結束後',title:'東山散步（彈性）',category:'街區散步',latitude:34.9986,longitude:135.7800,description:'若拍攝時間與體力允許，再逛二年坂、三年坂或找抹茶甜點；依攝影師拍攝時長決定，不另外排遠距離景點。',map:maps('二年坂 京都')},
   {time:'傍晚',title:'返回大阪',category:'住宿周邊',...dotonboriHotelLocation,description:'拍攝與東山散步結束後搭車回大阪，晚餐安排在住宿周邊。',transit:'回程路線與班次依結束時間確認。',map:maps('Apartment Hotel 11 Dotonbori 8')}
  ]},
- {day:3,date:'12.25',weekday:'週五',theme:'日本環球影城 USJ',location:'此花區',image:'日本環球影城園區',note:'已購買 2 張成人一日通行證，未購買快速通關。全天留給 USJ，不安排其他市區景點；開園時間、設施運轉與入園規則依官方公告確認。',stops:[
-  {time:'出發前',title:'入園準備清單',category:'已購票・無快速通關',latitude:34.6654,longitude:135.4323,description:'已購買日本環球影城成人一日通行證 2 張，未購買 Express Pass。出發前將電子票券與哈蜜熊爆米花桶兌換券存入手機；確認開園時間、官方 App 與超級任天堂世界入場方式。',map:maps('Universal Studios Japan')},
+ {day:3,date:'12.25',weekday:'週五',theme:'日本環球影城 USJ',location:'此花區',image:'日本環球影城園區',note:'已購買 4 張成人一日通行證，未購買快速通關。全天留給 USJ，不安排其他市區景點；開園時間、設施運轉與入園規則依官方公告確認。',stops:[
+  {time:'出發前',title:'入園準備清單',category:'已購票・無快速通關',latitude:34.6654,longitude:135.4323,description:'已購買日本環球影城成人一日通行證 4 張，未購買 Express Pass。出發前將電子票券與哈蜜熊爆米花桶兌換券存入手機；確認開園時間、官方 App 與超級任天堂世界入場方式。',map:maps('Universal Studios Japan')},
   {time:'全天',title:'Universal Studios Japan',nameEn:'Universal Studios Japan',category:'主題樂園',latitude:34.6654,longitude:135.4323,description:'持成人一日通行證入園，未購買快速通關；設施依一般排隊動線安排。哈利波特魔法世界、Super Nintendo World 與季節活動依當日營運及園區公告安排。另附哈蜜熊爆米花桶兌換券，可於園內販售車或店舖營業時間兌換。',transit:'由難波搭乘電車前往 Universal City；預留轉乘與入園安檢時間。',map:maps('Universal Studios Japan')},
   {time:'晚間',title:'Universal CityWalk',nameEn:'Universal CityWalk Osaka',category:'餐飲・購物',latitude:34.6677,longitude:135.4380,description:'園外餐飲與商店可作為離園後選擇，營業資訊待確認。',map:maps('Universal CityWalk Osaka')}
  ]},
