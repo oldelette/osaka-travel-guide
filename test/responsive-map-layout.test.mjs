@@ -71,3 +71,8 @@ test('map controls and markers keep usable touch targets at both breakpoints', (
   assert.equal(markerDesktop.get('min-height'), '36px');
   assert.equal(markerMobile.get('min-height'), '44px');
 });
+
+test('search input avoids iOS focus zoom on mobile and keeps desktop sizing', () => {
+  assert.equal(declarations('.inline-search input', 390).get('font-size'), '16px');
+  assert.equal(declarations('.inline-search input', 1440).get('font'), "12px 'Noto Sans TC',sans-serif");
+});
