@@ -89,5 +89,7 @@ test('search submits the query to Google in a new tab instead of filtering guide
   assert.match(app, /type="search" name="q"/);
   assert.match(app, /type="submit" aria-label="送出搜尋"/);
   assert.doesNotMatch(app, /Google 搜尋/);
+  assert.match(app, /className="print-button"/);
+  assert.match(app, /aria-label="下載 PDF／列印"/);
   assert.doesNotMatch(app, /searchItems|searchResults/);
 });
