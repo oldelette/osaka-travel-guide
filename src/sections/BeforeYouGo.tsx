@@ -25,8 +25,9 @@ export default function BeforeYouGo() {
           <a href="https://www.usj.co.jp/web/zh/tw" target="_blank" rel="noreferrer">日本環球影城官方網站 <ArrowUpRight size={14} /></a>
         </article>
         <article className="essential-card">
-          <CalendarDays aria-hidden="true" /><span>SEASONAL · DEC 26</span><h3>冬季活動仍待公告 <StatusBadge status="pending" /></h3>
-          <p>中之島燈飾與中央公會堂投影映射是不同活動，出發前分別確認日期與舉辦時間。</p>
+          <CalendarDays aria-hidden="true" /><span>NAKANOSHIMA · DEC 26</span><h3>中之島街道燈飾可看 <StatusBadge status="confirmed" /></h3>
+          <p>中之島イルミネーションストリート及市役所正面燈飾至 12/31，17:00–25:00。中央公會堂投影映射與 OSAKA 光之文藝復興至 12/25，12/26 已結束。</p>
+          <a href="https://www.city.osaka.lg.jp/hodoshiryo/keizaisenryaku/0000687506.html" target="_blank" rel="noreferrer">大阪市官方活動日期 <ArrowUpRight size={14} /></a>
           <small>市場休市日、店家營業時間也請另行確認。</small>
         </article>
       </div>

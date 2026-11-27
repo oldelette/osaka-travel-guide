@@ -27,7 +27,7 @@ export const days: DayPlan[] = [
   {time:'中午',title:'黑門市場 或 木津市場',category:'市場・美食',latitude:34.6655,longitude:135.5063,description:'擇一安排海鮮、壽司或海鮮丼；市場營業日與店家時間待確認。',map:maps('黑門市場')},
   {time:'午後',title:'心齋橋・美國村',category:'街區・購物',latitude:34.6721,longitude:135.5008,description:'依購物興趣漫步商店街與街區。',map:maps('心齋橋筋商店街')},
   {time:'傍晚',title:'梅田購物區',category:'購物區',latitude:34.7024,longitude:135.4959,description:'阪急百貨、Grand Front Osaka、LUCUA Osaka 擇選。HEP FIVE 摩天輪或梅田藍天大廈擇一。',map:maps('梅田大阪')},
-  {time:'晚上',title:'中之島冬季燈飾（待確認）',category:'活動・待確認',latitude:34.6937,longitude:135.5058,description:'另行確認 2026 活動日期與點燈時間。中央公會堂投影映射為另一項活動，不預設 12/26 仍舉行。',map:maps('中之島公會堂')}
+  {time:'晚上',title:'中之島イルミネーションストリート',category:'夜間燈飾',latitude:34.6937,longitude:135.5058,description:'中之島イルミネーションストリート與大阪市役所正面燈飾至 12/31，12/26 可觀賞（17:00–25:00）。OSAKA光のルネサンス與中央公會堂投影映射於 12/25 結束，12/26 無場次。',map:maps('中之島イルミネーションストリート')}
  ]},
  {day:5,date:'12.27',weekday:'週日',theme:'收拾行李・返程',location:'大阪 → 台北',image:'關西機場出境大廳',note:'返程日不安排觀光。建議依行李、交通與報到需求預留充足時間。',stops:[
   {time:'08:00–08:15',title:'飯店出發',category:'住宿',...dotonboriHotelLocation,description:'辦理退房，前往關西國際機場。以 09:00–09:30 抵達 KIX T1 為目標，預留交通與報到時間。',transit:'可搭千日前線一站至難波，再轉南海電鐵；四人行李較多也可評估預約接送。',map:maps('Apartment Hotel 11 Dotonbori 8')},
