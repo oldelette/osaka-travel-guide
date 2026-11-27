@@ -13,6 +13,7 @@ export { default as Menu } from 'lucide-react/dist/esm/icons/menu.js';
 export { default as Plane } from 'lucide-react/dist/esm/icons/plane.js';
 export { default as Printer } from 'lucide-react/dist/esm/icons/printer.js';
 export { default as RotateCcw } from 'lucide-react/dist/esm/icons/rotate-ccw.js';
+export { default as Search } from 'lucide-react/dist/esm/icons/search.js';
 export { default as Ticket } from 'lucide-react/dist/esm/icons/ticket.js';
 export { default as TrainFront } from 'lucide-react/dist/esm/icons/train-front.js';
 export { default as Utensils } from 'lucide-react/dist/esm/icons/utensils.js';
