@@ -75,11 +75,10 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid #a65e
 .inline-search>svg{flex:none}
 .inline-search input{width:100%;min-width:0;border:0;outline:0;background:transparent;color:var(--navy);font:12px 'Noto Sans TC',sans-serif}
 .inline-search input::placeholder{color:#8b9189}
-.inline-search input::-webkit-search-cancel-button{-webkit-appearance:none}
-.inline-search>button{display:flex;align-items:center;justify-content:center;gap:6px;flex:none;min-height:30px;padding:0 8px;border:1px solid #d7d1c5;background:transparent;color:var(--navy);font:inherit;white-space:nowrap;cursor:pointer}
+.inline-search>button{display:flex;align-items:center;justify-content:center;flex:none;width:34px;min-height:30px;padding:0;border:1px solid #d7d1c5;background:transparent;color:var(--navy);font:inherit;white-space:nowrap;cursor:pointer}
 .inline-search>button:hover:not(:disabled){background:#ebe7dc}
 .inline-search>button:disabled{opacity:.45;cursor:default}
 .inline-search:focus-within{border-color:#a36142;box-shadow:0 0 0 2px #a361421a}
-@media(max-width:860px){.topbar{gap:9px;height:auto;min-height:64px;flex-wrap:wrap;padding:10px 0}.topbar>span{display:none}.topbar-actions{justify-content:stretch;gap:8px}.inline-search{width:auto;flex:1;height:44px}.inline-search input{font-size:16px}.inline-search>button{min-height:36px;padding:0 7px;font-size:11px}.topbar .print-button{height:44px;min-height:44px;padding:0 10px;white-space:nowrap}}
-@media(max-width:400px){.inline-search>button{width:40px;padding:0;font-size:0}.inline-search>button svg{flex:none}.topbar .print-button{width:44px;justify-content:center;padding:0;font-size:0}.topbar .print-button svg{flex:none}}
+@media(max-width:860px){.topbar{gap:9px;height:auto;min-height:64px;flex-wrap:wrap;padding:10px 0}.topbar>span{display:none}.topbar-actions{justify-content:stretch;gap:8px}.inline-search{width:auto;flex:1;height:48px}.inline-search input{font-size:16px}.inline-search>button{width:44px;min-height:44px;padding:0}.topbar .print-button{height:44px;min-height:44px;padding:0 10px;white-space:nowrap}}
+@media(max-width:400px){.inline-search>button{width:44px;padding:0;font-size:0}.inline-search>button svg{flex:none}.topbar .print-button{width:44px;justify-content:center;padding:0;font-size:0}.topbar .print-button svg{flex:none}}
 @media print{.inline-search{display:none!important}}
