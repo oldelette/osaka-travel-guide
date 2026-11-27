@@ -79,13 +79,15 @@ test('search input avoids iOS focus zoom on mobile and keeps desktop sizing', ()
   assert.equal(declarations('.inline-search>button', 390).get('min-height'), '44px');
   assert.equal(declarations('.inline-search>button', 390).get('width'), '44px');
   assert.equal(declarations('.inline-search>button', 1440).get('width'), '34px');
+  assert.equal(declarations('.topbar .print-button', 390).get('width'), '44px');
+  assert.equal(declarations('.topbar .print-button', 390).get('font-size'), '0');
 });
 
 test('search submits the query to Google in a new tab instead of filtering guide content', () => {
   assert.match(app, /action="https:\/\/www\.google\.com\/search"/);
   assert.match(app, /method="get" target="_blank"/);
   assert.match(app, /type="search" name="q"/);
-  assert.match(app, /type="submit" aria-label="以 Google 搜尋"/);
-  assert.doesNotMatch(app, /<span>Google 搜尋<\/span>/);
+  assert.match(app, /type="submit" aria-label="送出搜尋"/);
+  assert.doesNotMatch(app, /Google 搜尋/);
   assert.doesNotMatch(app, /searchItems|searchResults/);
 });
